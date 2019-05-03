@@ -6,14 +6,14 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.post('/createPlant', (req, res) => {
-  store
-      .createUser({
-          plantName: req.body.plantName,
-          datePlanted: req.body.datePlanted
-      })
-      .then(() => {
-          res.sendStatus(200);
-      })
+    store
+        .createPlant({
+            plant_name: req.body.plant_name,
+            date_planted: req.body.date_planted
+        })
+        .then(() => {
+            res.sendStatus(200);
+        })
 });
 
 app.listen(7555, () => {

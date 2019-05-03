@@ -1,10 +1,12 @@
 const createPlantForm = document.querySelector('form[data-create-plant]');
+$('[data-create-plant-date-planted]').datepicker({format: 'yyyy/mm/dd'});
 
-createPlantForm.addEventListener('submit', (event) => {
+createPlantForm.addEventListener('submit', event => {
     event.preventDefault();
-    const plantName = createPlantForm.querySelector('input[data-create-plant-name]').value;
-    const datePlanted = createPlantForm.querySelector('input[data-create-plant-date-planted]').value;
-    post('/createPlant', {plantName, datePlanted});
+    const plant_name = createPlantForm.querySelector('input[data-create-plant-name]').value;
+    const date_planted = createPlantForm.querySelector('input[data-create-plant-date-planted]').value;
+    console.log(date_planted);
+    post('/createPlant', {plant_name, date_planted});
 });
 
 function post(path, data) {
