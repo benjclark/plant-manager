@@ -10,33 +10,74 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+    <style>
+        .manager-container {
+            padding: 10px 0 0 80px;
+        }
+        h1, h2 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        canvas {
+            margin-top: 30px;
+            position: relative;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.125) inset;
+        }
+
+        canvas:before, canvas:after
+        {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+            top:0;
+            bottom:0;
+            left:10px;
+            right:10px;
+            border-radius:100px / 10px;
+        }
+        canvas:after
+        {
+            right:10px;
+            left:auto;
+            transform:skew(8deg) rotate(3deg);
+        }
+    </style>
 </head>
 <body>
-<form data-create-plant>
-    <h1>Plant manager</h1>
-    <h2>Add a plant</h2>
-    <input type="text" placeholder="Plant name" data-plant-name>
-    <input type="text" placeholder="Plant date planted" data-plant-date-planted>
-    <input type="submit" value="Create plant">
-</form>
-<form data-create-bed>
-    <h2>Add a bed</h2>
-    <input type="text" placeholder="Bed name" data-bed-name>
-    <label for="bed-soil-characteristics">Soil characteristics</label>
-    <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
-        <option value="bare soil">bare soil</option>
-        <option value="composted">composted</option>
-        <option value="manured">manured</option>
-        <option value="manure and compost">manure and compost</option>
-    </select>
-    <label for="bed-type">Bed type</label>
-    <select name="bed-type" data-bed-type id="bed-type">
-        <option value="hungry veg">hungry veg</option>
-        <option value="root veg">root veg</option>
-        <option value="brassica veg">brassica veg</option>
-    </select>
-    <input type="submit" value="Create bed">
-</form>
+<div class="manager-container">
+    <form data-create-plant>
+        <h1>Plant manager</h1>
+        <h2>Add a plant</h2>
+        <input type="text" placeholder="Plant name" data-plant-name>
+        <input type="text" placeholder="Plant date planted" data-plant-date-planted>
+        <input type="submit" value="Create plant">
+    </form>
+    <form data-create-bed>
+        <h2>Add a bed</h2>
+        <input type="text" placeholder="Bed name" data-bed-name>
+        <label for="bed-soil-characteristics">Soil characteristics</label>
+        <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
+            <option value="bare soil">bare soil</option>
+            <option value="composted">composted</option>
+            <option value="manured">manured</option>
+            <option value="manure and compost">manure and compost</option>
+        </select>
+        <label for="bed-type">Bed type</label>
+        <select name="bed-type" data-bed-type id="bed-type">
+            <option value="hungry veg">hungry veg</option>
+            <option value="root veg">root veg</option>
+            <option value="brassica veg">brassica veg</option>
+        </select>
+        <input type="submit" value="Create bed">
+    </form>
+    <canvas width="540" height="800"></canvas>
+</div>
 <script src="app.js"></script>
+<script src="interact-with-canvas.js"></script>
 </body>
 </html>
