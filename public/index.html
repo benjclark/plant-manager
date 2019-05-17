@@ -13,10 +13,29 @@
 </head>
 <body>
 <form data-create-plant>
-    <h1>Add a plant</h1>
-    <input type="text" placeholder="Plant name" data-create-plant-name>
-    <input type="text" placeholder="Date planted" data-create-plant-date-planted>
+    <h1>Plant manager</h1>
+    <h2>Add a plant</h2>
+    <input type="text" placeholder="Plant name" data-plant-name>
+    <input type="text" placeholder="Plant date planted" data-plant-date-planted>
     <input type="submit" value="Create plant">
+</form>
+<form data-create-bed>
+    <h2>Add a bed</h2>
+    <input type="text" placeholder="Bed name" data-bed-name>
+    <label for="bed-soil-characteristics">Soil characteristics</label>
+    <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
+        <option value="bare soil">bare soil</option>
+        <option value="composted">composted</option>
+        <option value="manured">manured</option>
+        <option value="manure and compost">manure and compost</option>
+    </select>
+    <label for="bed-type">Bed type</label>
+    <select name="bed-type" data-bed-type id="bed-type">
+        <option value="hungry veg">hungry veg</option>
+        <option value="root veg">root veg</option>
+        <option value="brassica veg">brassica veg</option>
+    </select>
+    <input type="submit" value="Create bed">
 </form>
 <script src="app.js"></script>
 </body>
