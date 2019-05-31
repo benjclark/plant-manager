@@ -8,9 +8,19 @@ function mouseUpHandler(e) {
 
     // clear all the dragging flags
     mouseEventVars.dragok = false;
-    for (let i = 0; i < pm.rectangles.length; i++) {
-        pm.rectangles[i].isDragging = false;
+
+    for (let z = 0; z < pm.rectangles.length; z++) {
+        pm.rectangles[z].isDragging = false;
     }
+
+    // for (let i = 0; i < pm.rectangles.length; i++) {
+    //     const r = pm.rectangles[i];
+    //     const bed_name = r.name;
+    //     const bed_x = r.x;
+    //     const bed_y = r.y;
+    //     console.log({bed_name, bed_x, bed_y});
+    //     post('/updateRecPosition', {bed_name, bed_x, bed_y});
+    // }
 }
 
 function mouseDownHandler(e) {
@@ -27,8 +37,14 @@ function mouseDownHandler(e) {
     mouseEventVars.dragok = false;
     for (let i = 0; i < pm.rectangles.length; i++) {
         const r = pm.rectangles[i];
-        if (mx > r.x && mx < r.x + r.width && my > r.y && my < r.y + r.height) {
+        if ((mx > r.x) && (mx < (r.x + r.width)) && (my > r.y) && (my < (r.y + r.height))) {
             // if yes, set that rects isDragging=true
+            console.log('rec just started dragging  ', r);
+            console.log((mx > r.x) +"  "+ (mx < (r.x + r.width) +"  "+ (my > r.y) +"  "+ (my < (r.y + r.height)));
+            console.log("rec " + r.name + " - mouse x position " + mx + " is greater than rectangle x " + r.x);
+            console.log("rec " + r.name + " - mouse x position " + mx + " is less than rectangle x " + r.x + " plus rectangle width " + r.width);
+            console.log("rec " + r.name + " - mouse y position " + my + " is greater than rectangle y " + r.y);
+            console.log("rec " + r.name + " - mouse y position " + my + " is less than rectangle y " + r.y + " plus rectangle height " + r.height);
             mouseEventVars.dragok = true;
             r.isDragging = true;
         }
@@ -81,6 +97,17 @@ function setupMouseEventVariables() {
     mouseEventVars.dragok = false;
     mouseEventVars.startX = undefined;
     mouseEventVars.startY = undefined;
+}
+
+function post(path, data) {
+    return window.fetch(path, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
 }
 
 module.exports = {

@@ -20,10 +20,8 @@
         }
         h2 {
             font-size: 1.2rem;
-            margin-top: 10px;
         }
         canvas {
-            margin-top: 30px;
             position: relative;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.125) inset;
         }
@@ -34,11 +32,11 @@
             position:absolute;
             z-index:-1;
             box-shadow:0 0 20px rgba(0,0,0,0.8);
+            border-radius:100px / 10px;
             top:0;
             bottom:0;
             left:10px;
             right:10px;
-            border-radius:100px / 10px;
         }
         canvas:after
         {
@@ -46,36 +44,138 @@
             left:auto;
             transform:skew(8deg) rotate(3deg);
         }
+        .plus-icon {
+            display: inline-block;
+            width: 50px;
+        }
+        .plus-icon:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url("/plus-icon.png");
+            width: 50px;
+            height: 50px;
+        }
+        .disp-flex-row {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        .disp-flex-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .pos-relative {
+            position: relative;
+        }
+        .width-100 {
+            width: 100%;
+        }
+        .margin-top {
+            margin-top: 30px;
+        }
+        .margin-right {
+            margin-right: 30px;
+        }
+        .add-button {
+            margin-left: 10px;
+            line-height: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .overlay {
+            padding: 14px;
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -260px;
+            background-color: rgb(247, 247, 247);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.225);
+        }
+        label {
+            display: block;
+            margin: 0;
+        }
+        input[type="submit"] {
+            display: block;
+            margin-top: 20px;
+        }
+        form > * {
+            margin-top: 6px;
+        }
+        form > *:nth-child(1) {
+            margin-top: 0;
+        }
+        .close-icon:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-image: url('/close-icon.png');
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .close-icon:hover, .plus-icon:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 <div class="manager-container">
-    <form data-create-plant>
-        <h1>Plant manager</h1>
-        <h2>Add a plant</h2>
-        <input type="text" placeholder="Plant name" data-plant-name>
-        <input type="text" placeholder="Plant date planted" data-plant-date-planted>
-        <input type="submit" value="Create plant">
-    </form>
-    <form data-create-bed>
-        <h2>Add a bed</h2>
-        <input type="text" placeholder="Bed name" data-bed-name>
-        <label for="bed-soil-characteristics">Soil characteristics</label>
-        <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
-            <option value="bare soil">bare soil</option>
-            <option value="composted">composted</option>
-            <option value="manured">manured</option>
-            <option value="manure and compost">manure and compost</option>
-        </select>
-        <label for="bed-type">Bed type</label>
-        <select name="bed-type" data-bed-type id="bed-type">
-            <option value="hungry veg">hungry veg</option>
-            <option value="root veg">root veg</option>
-            <option value="brassica veg">brassica veg</option>
-        </select>
-        <input type="submit" value="Create bed">
-    </form>
-    <canvas width="540" height="800"></canvas>
+    <h1>Plant manager</h1>
+    <div class="disp-flex-row margin-top">
+        <canvas class="margin-right" width="540" height="800"></canvas>
+        <div class="width-100 disp-flex-column">
+            <div class="pos-relative">
+                <span class="plus-icon" data-add-button="bed"></span><span class="add-button">Bed</span>
+            </div>
+            <div class="pos-relative">
+                <span class="plus-icon" data-add-button="plant"></span><span class="add-button">Plant</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlay hidden" data-add-plant-overlay>
+    <div class="pos-relative">
+        <form data-create-plant>
+            <h2>Add a plant</h2>
+            <input type="text" placeholder="Plant name" data-plant-name>
+            <input type="text" placeholder="Plant date planted" data-plant-date-planted>
+            <input type="submit" value="Create plant">
+        </form>
+        <span class="close-icon" data-close-button="plant"></span>
+    </div>
+</div>
+<div class="overlay hidden" data-add-bed-overlay>
+    <div class="pos-relative">
+        <form data-create-bed>
+            <h2>Add a bed</h2>
+            <input type="text" placeholder="Bed name" data-bed-name>
+            <label for="bed-soil-characteristics">Soil characteristics</label>
+            <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
+                <option value="bare soil">bare soil</option>
+                <option value="composted">composted</option>
+                <option value="manured">manured</option>
+                <option value="manure and compost">manure and compost</option>
+            </select>
+            <label for="bed-type">Bed type</label>
+            <select name="bed-type" data-bed-type id="bed-type">
+                <option value="hungry veg">hungry veg</option>
+                <option value="root veg">root veg</option>
+                <option value="brassica veg">brassica veg</option>
+            </select>
+            <input type="number" placeholder="Width px" data-bed-width>
+            <input type="number" placeholder="Height px" data-bed-height>
+            <input type="text" placeholder="Colour hex" data-bed-colour>
+            <input type="submit" value="Create bed">
+        </form>
+        <span class="close-icon" data-close-button="bed"></span>
+    </div>
 </div>
 <script src="app.js"></script>
 <script src="interact-with-canvas.js"></script>

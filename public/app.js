@@ -13,7 +13,34 @@ createBedForm.addEventListener('submit', event => {
     const bed_name = createBedForm.querySelector('input[data-bed-name]').value;
     const bed_soil_characteristics = createBedForm.querySelector('select[data-bed-soil-characteristics]').value;
     const bed_type = createBedForm.querySelector('select[data-bed-type]').value;
-    post('/createBed', {bed_name, bed_soil_characteristics, bed_type});
+    const bed_width = createBedForm.querySelector('input[data-bed-width]').value;
+    const bed_height = createBedForm.querySelector('input[data-bed-height]').value;
+    const bed_colour = createBedForm.querySelector('input[data-bed-colour]').value;
+    const bed_x = 200;
+    const bed_y = 300;
+    window.plantManager.rectangles.push({
+        name: bed_name,
+        x: bed_x,
+        y: bed_y,
+        width: bed_width,
+        height: bed_height,
+        fill: bed_colour,
+        isDragging: false
+    });
+    window.plantManager.drawAll();
+    post('/createBed', {bed_name, bed_soil_characteristics, bed_type, bed_width, bed_height, bed_colour, bed_x, bed_y});
+});
+[].slice.call(document.querySelectorAll('[data-add-button]')).forEach(button => {
+    const value = button.dataset.addButton;
+    button.addEventListener('click', event => {
+        document.querySelector(`div[data-add-${value}-overlay]`).classList.remove('hidden');
+    });
+});
+[].slice.call(document.querySelectorAll('[data-close-button]')).forEach(button => {
+    const value = button.dataset.closeButton;
+    button.addEventListener('click', event => {
+        document.querySelector(`div[data-add-${value}-overlay]`).classList.add('hidden');
+    });
 });
 
 function post(path, data) {
