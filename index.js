@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const store = require('./store');
+const retrieve = require('./retrieve');
 
 const app = express();
 app.use(express.static('public'));
@@ -42,6 +43,13 @@ app.post('/updateRecPosition', (req, res) => {
         })
         .then(() => {
             res.sendStatus(200);
+        })
+});
+
+app.get('/getBeds', (req, res) => {
+    retrieve.getBeds()
+        .then((response) => {
+            res.send(response)
         })
 });
 
