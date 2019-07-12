@@ -39,10 +39,29 @@ const drawOnCanvas = require('./draw-on-canvas');
 const canvas = document.querySelector('canvas');
 const canvasContext = canvas.getContext('2d');
 
+function renderCurrentlySelectedRect() {
+    const currentSelected = window.plantManager.mouseEventVariables.currentRectSelected;
+    if (!currentSelected) {
+        return;
+    }
+
+    const updateBedForm = document.querySelector('form[data-update-bed]');
+    const name = currentSelected.name;
+    const width = currentSelected.width;
+    const height = currentSelected.height;
+    const fill = currentSelected.fill;
+
+    updateBedForm.querySelector('[data-bed-name]').value = name;
+    updateBedForm.querySelector('[data-bed-width]').value = width;
+    updateBedForm.querySelector('[data-bed-height]').value = height;
+    updateBedForm.querySelector('[data-bed-colour]').value = fill;
+}
+
 window.plantManager = {
     canvasOffsetX: canvas.getBoundingClientRect().left,
     canvasOffsetY: canvas.getBoundingClientRect().top,
-    rectangles: []
+    rectangles: [],
+    renderCurrentlySelectedRect: renderCurrentlySelectedRect
 };
 const pm = window.plantManager;
 
@@ -93,7 +112,9 @@ function mouseDownHandler(e) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
             mouseEventVars.currentRectSelected = r;
+            console.log(mouseEventVars.currentRectSelected);
             r.isDragging = true;
+            pm.renderCurrentlySelectedRect();
             break;
         }
     }
