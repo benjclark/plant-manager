@@ -2,11 +2,17 @@ const createPlantForm = document.querySelector('form[data-create-plant]');
 const createBedForm = document.querySelector('form[data-create-bed]');
 $('[data-plant-date-planted]').datepicker({format: 'yyyy/mm/dd'});
 
+function closeAllOverlays() {
+    const overlays = document.querySelectorAll('.overlay');
+    overlays.forEach(el => {el.classList.add('hidden')});
+}
+
 createPlantForm.addEventListener('submit', event => {
     event.preventDefault();
     const plant_name = createPlantForm.querySelector('input[data-plant-name]').value;
     const date_planted = createPlantForm.querySelector('input[data-plant-date-planted]').value;
     post('/createPlant', {plant_name, date_planted});
+    closeAllOverlays();
 });
 createBedForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -29,6 +35,7 @@ createBedForm.addEventListener('submit', event => {
     });
     window.plantManager.drawAll();
     post('/createBed', {bed_name, bed_soil_characteristics, bed_type, bed_width, bed_height, bed_colour, bed_x, bed_y});
+    closeAllOverlays();
 });
 [].slice.call(document.querySelectorAll('[data-add-button]')).forEach(button => {
     const value = button.dataset.addButton;
@@ -40,25 +47,6 @@ createBedForm.addEventListener('submit', event => {
     const value = button.dataset.closeButton;
     button.addEventListener('click', event => {
         document.querySelector(`div[data-add-${value}-overlay]`).classList.add('hidden');
-    });
-});
-document.querySelector('button[data-get-beds]').addEventListener('click', event => {
-    event.preventDefault();
-    get('/getBeds').then(response => {
-        response.json().then(data => {
-            data.forEach(obj => {
-                window.plantManager.rectangles.push({
-                    name: obj.bed_name,
-                    x: obj.bed_x,
-                    y: obj.bed_y,
-                    width: obj.bed_width,
-                    height: obj.bed_height,
-                    fill: obj.bed_colour,
-                    isDragging: false
-                });
-            });
-            window.plantManager.drawAll();
-        });
     });
 });
 document.querySelector('button[data-update-beds]').addEventListener('click', event => {
@@ -91,3 +79,20 @@ function get(path) {
         }
     });
 }
+
+get('/getBeds').then(response => {
+    response.json().then(data => {
+        data.forEach(obj => {
+            window.plantManager.rectangles.push({
+                name: obj.bed_name,
+                x: obj.bed_x,
+                y: obj.bed_y,
+                width: obj.bed_width,
+                height: obj.bed_height,
+                fill: obj.bed_colour,
+                isDragging: false
+            });
+        });
+        window.plantManager.drawAll();
+    });
+});
