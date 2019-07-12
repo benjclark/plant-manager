@@ -7,7 +7,7 @@ function mouseUpHandler(e) {
     e.stopPropagation();
 
     // clear all the dragging flags
-    mouseEventVars.dragok = false;
+    mouseEventVars.somethingIsBeingDragged = false;
 
     for (let z = 0; z < pm.rectangles.length; z++) {
         pm.rectangles[z].isDragging = false;
@@ -24,14 +24,17 @@ function mouseDownHandler(e) {
     const mx = parseInt(e.clientX - pm.canvasOffsetX);
     const my = parseInt(e.clientY - pm.canvasOffsetY);
 
+    // clear all the dragging flags
+    mouseEventVars.somethingIsBeingDragged = false;
+
     // test each rect to see if mouse is inside
-    mouseEventVars.dragok = false;
-    for (let i = 0; i < pm.rectangles.length; i++) {
+    for (let i = (pm.rectangles.length - 1); i >= 0; i--) {
         const r = pm.rectangles[i];
         if (mx > parseInt(r.x, 10) && mx < parseInt(r.x, 10) + parseInt(r.width, 10) && my > parseInt(r.y, 10) && my < parseInt(r.y, 10) + parseInt(r.height, 10)) {
             // if yes, set that rects isDragging=true
-            mouseEventVars.dragok = true;
+            mouseEventVars.somethingIsBeingDragged = true;
             r.isDragging = true;
+            break;
         }
     }
     // save the current mouse position
@@ -43,7 +46,7 @@ function mouseMoveHandler(e) {
     const pm = window.plantManager;
     const mouseEventVars = pm.mouseEventVariables;
     // if we're dragging anything...
-    if (mouseEventVars.dragok) {
+    if (mouseEventVars.somethingIsBeingDragged) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -79,7 +82,7 @@ function mouseMoveHandler(e) {
 function setupMouseEventVariables() {
     const pm = window.plantManager;
     const mouseEventVars = pm.mouseEventVariables = {};
-    mouseEventVars.dragok = false;
+    mouseEventVars.somethingIsBeingDragged = false;
     mouseEventVars.startX = undefined;
     mouseEventVars.startY = undefined;
 }
