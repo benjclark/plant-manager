@@ -15,11 +15,16 @@ function renderCurrentlySelectedRect() {
     const width = currentSelected.width;
     const height = currentSelected.height;
     const fill = currentSelected.fill;
+    const soilCharacteristics = currentSelected.soil_characteristics;
+    const type = currentSelected.bed_type;
+
 
     updateBedForm.querySelector('[data-bed-name]').value = name;
     updateBedForm.querySelector('[data-bed-width]').value = width;
     updateBedForm.querySelector('[data-bed-height]').value = height;
     updateBedForm.querySelector('[data-bed-colour]').value = fill;
+    updateBedForm.querySelector('[data-bed-soil-characteristics]').value = soilCharacteristics;
+    updateBedForm.querySelector('[data-bed-type]').value = type;
 }
 
 window.plantManager = {

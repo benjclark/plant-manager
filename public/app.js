@@ -31,6 +31,8 @@ createBedForm.addEventListener('submit', event => {
         width: bed_width,
         height: bed_height,
         fill: bed_colour,
+        soil_characteristics: bed_soil_characteristics,
+        bed_type: bed_type,
         isDragging: false
     });
     window.plantManager.drawAll();
@@ -90,6 +92,8 @@ get('/getBeds').then(response => {
                 width: obj.bed_width,
                 height: obj.bed_height,
                 fill: obj.bed_colour,
+                soil_characteristics: obj.bed_soil_characteristics,
+                bed_type: obj.bed_type,
                 isDragging: false
             });
         });
