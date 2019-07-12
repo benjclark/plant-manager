@@ -92,6 +92,7 @@ function mouseDownHandler(e) {
         if (mx > parseInt(r.x, 10) && mx < parseInt(r.x, 10) + parseInt(r.width, 10) && my > parseInt(r.y, 10) && my < parseInt(r.y, 10) + parseInt(r.height, 10)) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
+            mouseEventVars.currentRectSelected = r;
             r.isDragging = true;
             break;
         }
@@ -142,6 +143,7 @@ function setupMouseEventVariables() {
     const pm = window.plantManager;
     const mouseEventVars = pm.mouseEventVariables = {};
     mouseEventVars.somethingIsBeingDragged = false;
+    mouseEventVars.currentRectSelected = undefined;
     mouseEventVars.startX = undefined;
     mouseEventVars.startY = undefined;
 }
