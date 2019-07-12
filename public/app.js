@@ -45,7 +45,6 @@ createBedForm.addEventListener('submit', event => {
 document.querySelector('button[data-get-beds]').addEventListener('click', event => {
     event.preventDefault();
     get('/getBeds').then(response => {
-        console.dir(response);
         response.json().then(data => {
             data.forEach(obj => {
                 window.plantManager.rectangles.push({
@@ -66,9 +65,7 @@ document.querySelector('button[data-update-beds]').addEventListener('click', eve
     event.preventDefault();
     const pm = window.plantManager;
     for (let z = 0; z < pm.rectangles.length; z++) {
-        setTimeout(() => {
-            post('/updateRecPosition',{bed_name: pm.rectangles[z].name, bed_x: pm.rectangles[z].x, bed_y: pm.rectangles[z].y});
-        }, 500);
+        post('/updateRecPosition',{bed_name: pm.rectangles[z].name, bed_x: pm.rectangles[z].x, bed_y: pm.rectangles[z].y});
     }
 });
 

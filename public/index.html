@@ -14,40 +14,44 @@
         .manager-container {
             padding: 10px 0 0 80px;
         }
+
         h1, h2 {
             margin: 0;
             font-size: 1.6rem;
         }
+
         h2 {
             font-size: 1.2rem;
         }
+
         canvas {
             position: relative;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.125) inset;
         }
 
-        canvas:before, canvas:after
-        {
-            content:"";
-            position:absolute;
-            z-index:-1;
-            box-shadow:0 0 20px rgba(0,0,0,0.8);
-            border-radius:100px / 10px;
-            top:0;
-            bottom:0;
-            left:10px;
-            right:10px;
+        canvas:before, canvas:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            border-radius: 100px / 10px;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            right: 10px;
         }
-        canvas:after
-        {
-            right:10px;
-            left:auto;
-            transform:skew(8deg) rotate(3deg);
+
+        canvas:after {
+            right: 10px;
+            left: auto;
+            transform: skew(8deg) rotate(3deg);
         }
+
         .plus-icon {
             display: inline-block;
             width: 50px;
         }
+
         .plus-icon:after {
             content: '';
             position: absolute;
@@ -57,34 +61,43 @@
             width: 50px;
             height: 50px;
         }
+
         .disp-flex-row {
             display: flex;
             justify-content: space-between;
             flex-direction: row;
         }
+
         .disp-flex-column {
             display: flex;
             flex-direction: column;
         }
+
         .pos-relative {
             position: relative;
         }
+
         .width-100 {
             width: 100%;
         }
+
         .margin-top {
             margin-top: 30px;
         }
+
         .margin-right {
             margin-right: 30px;
         }
+
         .add-button {
             margin-left: 10px;
             line-height: 50px;
         }
+
         .hidden {
             display: none;
         }
+
         .overlay {
             padding: 14px;
             width: 300px;
@@ -97,20 +110,25 @@
             background-color: rgb(247, 247, 247);
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.225);
         }
+
         label {
             display: block;
             margin: 0;
         }
+
         input[type="submit"] {
             display: block;
             margin-top: 20px;
         }
+
         form > * {
             margin-top: 6px;
         }
+
         form > *:nth-child(1) {
             margin-top: 0;
         }
+
         .close-icon:after {
             content: '';
             width: 20px;
@@ -120,6 +138,7 @@
             top: 0;
             right: 0;
         }
+
         .close-icon:hover, .plus-icon:hover {
             cursor: pointer;
         }
@@ -137,8 +156,8 @@
             <div class="pos-relative">
                 <span class="plus-icon" data-add-button="plant"></span><span class="add-button">Plant</span>
             </div>
-            <button data-get-beds style="width:100px">get beds</button>
-            <button data-update-beds style="width:100px">update beds</button>
+            <button data-get-beds style="width:100px; margin-top: 20px">Load all</button>
+            <button data-update-beds style="width:100px; margin-top: 20px">Save all</button>
         </div>
     </div>
 </div>
