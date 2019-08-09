@@ -42,5 +42,10 @@ module.exports = {
             .update({bed_width: _bed_width})
             .update({bed_height: _bed_height})
             .update({bed_colour: _bed_colour})
+    },
+    deleteBed({bed_name}) {
+        const _bed_name = bed_name;
+        return knex('beds').where({bed_name: _bed_name}).del()
+
     }
 };

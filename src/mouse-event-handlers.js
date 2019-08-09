@@ -35,7 +35,7 @@ function mouseDownHandler(e) {
             mouseEventVars.somethingIsBeingDragged = true;
             mouseEventVars.currentRectSelected = r;
             r.isDragging = true;
-            pm.renderCurrentlySelectedRect();
+            pm.renderEditBedFormForCurrentlySelectedRect();
             break;
         }
     }

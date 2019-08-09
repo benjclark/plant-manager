@@ -39,7 +39,7 @@ const drawOnCanvas = require('./draw-on-canvas');
 const canvas = document.querySelector('canvas');
 const canvasContext = canvas.getContext('2d');
 
-function renderCurrentlySelectedRect() {
+function renderEditBedFormForCurrentlySelectedRect() {
     const currentSelected = window.plantManager.mouseEventVariables.currentRectSelected;
     if (!currentSelected) {
         return;
@@ -66,7 +66,7 @@ window.plantManager = {
     canvasOffsetX: canvas.getBoundingClientRect().left,
     canvasOffsetY: canvas.getBoundingClientRect().top,
     rectangles: [],
-    renderCurrentlySelectedRect: renderCurrentlySelectedRect
+    renderEditBedFormForCurrentlySelectedRect: renderEditBedFormForCurrentlySelectedRect
 };
 const pm = window.plantManager;
 
@@ -118,7 +118,7 @@ function mouseDownHandler(e) {
             mouseEventVars.somethingIsBeingDragged = true;
             mouseEventVars.currentRectSelected = r;
             r.isDragging = true;
-            pm.renderCurrentlySelectedRect();
+            pm.renderEditBedFormForCurrentlySelectedRect();
             break;
         }
     }

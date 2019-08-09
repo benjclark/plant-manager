@@ -56,7 +56,15 @@ app.post('/updateBed', (req, res) => {
             bed_colour: req.body.bed_colour
         })
         .then(() => {
-            console.log('updated bed ', req.body);
+            res.sendStatus(200);
+        })
+});
+app.post('/deleteBed', (req, res) => {
+    store
+        .deleteBed({
+            bed_name: req.body.bed_name
+        })
+        .then(() => {
             res.sendStatus(200);
         })
 });

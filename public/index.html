@@ -85,10 +85,6 @@
             margin-top: 30px;
         }
 
-        .margin-top--large {
-            margin-top: 60px;
-        }
-
         .margin-right {
             margin-right: 30px;
         }
@@ -152,8 +148,19 @@
         }
 
         .save-button {
-            width: 100px;
-            border-radius: 4px;
+            width: 180px;
+            background-image: linear-gradient(to bottom, #e4e4e4, #f7f7f7);
+            border-color: rgb(186, 186, 186) rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+        }
+        form.update-bed-form {
+            width: 200px;
+            border: 1px solid #CCC;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        span.edit-bed {
+            font-size: 20px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -169,10 +176,11 @@
             <div class="pos-relative">
                 <span class="plus-icon" data-add-button="plant"></span><span class="add-button">Plant</span>
             </div>
-            <button data-update-beds class="margin-top save-button">Save all</button>
+            <button data-update-beds class="margin-top save-button">Save all bed positions</button>
 
-            <div class="margin-top--large">
-                <form data-update-bed>
+            <div class="margin-top">
+                <span class="edit-bed">Edit bed</span><sup> (click on one to edit)</sup>
+                <form data-update-bed class="update-bed-form">
                     <label for="bed-update-name">Bed name</label>
                     <input type="text" id="bed-update-name" placeholder="Bed name" data-bed-name>
                     <label for="bed-update-soil-characteristics">Soil characteristics</label>
@@ -194,7 +202,9 @@
                     <input type="number" id="bed-update-height" placeholder="Height px" data-bed-height>
                     <label for="bed-update-colour">Bed colour</label>
                     <input type="text" id="bed-update-colour" placeholder="Colour hex" data-bed-colour>
-                    <input type="submit" value="Update bed">
+                    <input type="submit" value="Save bed data" data-save-bed>
+                    <input type="submit" value="Delete bed" data-delete-bed>
+
                 </form>
             </div>
         </div>
