@@ -86,7 +86,7 @@
         }
 
         .margin-top--large {
-            margin-top: 80px;
+            margin-top: 60px;
         }
 
         .margin-right {
@@ -173,23 +173,27 @@
 
             <div class="margin-top--large">
                 <form data-update-bed>
-                    <input type="text" placeholder="Bed name" data-bed-name>
-                    <label for="bed-soil-characteristics">Soil characteristics</label>
-                    <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-soil-characteristics">
+                    <label for="bed-update-name">Bed name</label>
+                    <input type="text" id="bed-update-name" placeholder="Bed name" data-bed-name>
+                    <label for="bed-update-soil-characteristics">Soil characteristics</label>
+                    <select name="bed-soil-characteristics" data-bed-soil-characteristics id="bed-update-soil-characteristics">
                         <option value="bare soil">bare soil</option>
                         <option value="composted">composted</option>
                         <option value="manured">manured</option>
                         <option value="manure and compost">manure and compost</option>
                     </select>
-                    <label for="bed-type">Bed type</label>
-                    <select name="bed-type" data-bed-type id="bed-type">
+                    <label for="bed-update-type">Bed type</label>
+                    <select name="bed-type" data-bed-type id="bed-update-type">
                         <option value="hungry veg">hungry veg</option>
                         <option value="root veg">root veg</option>
                         <option value="brassica veg">brassica veg</option>
                     </select>
-                    <input type="number" placeholder="Width px" data-bed-width>
-                    <input type="number" placeholder="Height px" data-bed-height>
-                    <input type="text" placeholder="Colour hex" data-bed-colour>
+                    <label for="bed-update-width">Bed width</label>
+                    <input type="number" id="bed-update-width" placeholder="Width px" data-bed-width>
+                    <label for="bed-update-height">Bed height</label>
+                    <input type="number" id="bed-update-height" placeholder="Height px" data-bed-height>
+                    <label for="bed-update-colour">Bed colour</label>
+                    <input type="text" id="bed-update-colour" placeholder="Colour hex" data-bed-colour>
                     <input type="submit" value="Update bed">
                 </form>
             </div>

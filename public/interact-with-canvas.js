@@ -117,7 +117,6 @@ function mouseDownHandler(e) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
             mouseEventVars.currentRectSelected = r;
-            console.log(mouseEventVars.currentRectSelected);
             r.isDragging = true;
             pm.renderCurrentlySelectedRect();
             break;

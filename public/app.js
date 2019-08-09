@@ -7,6 +7,16 @@ function closeAllOverlays() {
     overlays.forEach(el => {el.classList.add('hidden')});
 }
 
+function retrieveBedFromWindowObject(name) {
+    const rectangles = window.plantManager.rectangles;
+    for (let i = 0; i < rectangles.length; i++) {
+        if (rectangles[i].name === name) {
+            return rectangles[i];
+        }
+    }
+
+}
+
 createPlantForm.addEventListener('submit', event => {
     event.preventDefault();
     const plant_name = createPlantForm.querySelector('input[data-plant-name]').value;
@@ -55,8 +65,29 @@ document.querySelector('button[data-update-beds]').addEventListener('click', eve
     event.preventDefault();
     const pm = window.plantManager;
     for (let z = 0; z < pm.rectangles.length; z++) {
-        post('/updateRecPosition',{bed_name: pm.rectangles[z].name, bed_x: pm.rectangles[z].x, bed_y: pm.rectangles[z].y});
+        post('/updateBedPosition',{bed_name: pm.rectangles[z].name, bed_x: pm.rectangles[z].x, bed_y: pm.rectangles[z].y});
     }
+});
+document.querySelector('form[data-update-bed]').addEventListener('submit', event => {
+    event.preventDefault();
+    const updateBedForm = document.querySelector('form[data-update-bed]');
+
+    const name = updateBedForm.querySelector('[data-bed-name]').value;
+    const bed = retrieveBedFromWindowObject(name);
+    bed.name = name;
+    const width = updateBedForm.querySelector('[data-bed-width]').value;
+    bed.width = parseInt(width, 10);
+    const height = updateBedForm.querySelector('[data-bed-height]').value;
+    bed.height = parseInt(height, 10);
+    const fill = updateBedForm.querySelector('[data-bed-colour]').value;
+    bed.fill = fill;
+    const soilCharacteristics = updateBedForm.querySelector('[data-bed-soil-characteristics]').value;
+    bed.soilCharacteristics = soilCharacteristics;
+    const type = updateBedForm.querySelector('[data-bed-type]').value;
+    bed.type = type;
+
+    post('/updateBed',{bed_name: name, bed_soil_characteristics: soilCharacteristics, bed_type: type, bed_width: width, bed_height: height, bed_colour: fill});
+    window.plantManager.drawAll();
 });
 
 function post(path, data) {

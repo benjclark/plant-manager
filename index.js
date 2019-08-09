@@ -34,9 +34,9 @@ app.post('/createBed', (req, res) => {
             res.sendStatus(200);
         })
 });
-app.post('/updateRecPosition', (req, res) => {
+app.post('/updateBedPosition', (req, res) => {
     store
-        .updateRecPosition({
+        .updateBedPosition({
             bed_name: req.body.bed_name,
             bed_x: req.body.bed_x,
             bed_y: req.body.bed_y
@@ -45,7 +45,21 @@ app.post('/updateRecPosition', (req, res) => {
             res.sendStatus(200);
         })
 });
-
+app.post('/updateBed', (req, res) => {
+    store
+        .updateBed({
+            bed_name: req.body.bed_name,
+            bed_soil_characteristics: req.body.bed_soil_characteristics,
+            bed_type: req.body.bed_type,
+            bed_width: req.body.bed_width,
+            bed_height: req.body.bed_height,
+            bed_colour: req.body.bed_colour
+        })
+        .then(() => {
+            console.log('updated bed ', req.body);
+            res.sendStatus(200);
+        })
+});
 app.get('/getBeds', (req, res) => {
     retrieve.getBeds()
         .then((response) => {
