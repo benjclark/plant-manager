@@ -153,9 +153,11 @@
             padding: 10px;
             border-radius: 3px;
         }
-        span.edit-bed {
+        div.edit-bed {
             font-size: 20px;
             font-weight: 500;
+            position: relative;
+            line-height: 1.4;
         }
         .horizontal-width-text {
             text-align: center;
@@ -179,19 +181,32 @@
             color: initial;
             font-weight: 700;
             font-size: 24px;
+            position: relative;
+            line-height: 1.4;
         }
         table, td, th {
             border: 1px solid #ccc;
-            text-align: center;
         }
         td, th {
             padding: 1px 6px;
-        }
-        td {
+            text-align: center;
             font-size: 12px;
+        }
+        td input {
+            border: none;
+            text-align: center;
         }
         .tables-container {
             margin-left: 40px;
+        }
+        sup {
+            font-size: 10px;
+            font-weight: 100;
+            top: 0;
+            position: absolute;
+        }
+        tr[data-empty=true] {
+            display: none;
         }
     </style>
 </head>
@@ -211,7 +226,7 @@
             </div>
             <button data-update-beds class="margin-top save-button">Save bed positions</button>
             <div class="margin-top">
-                <span class="edit-bed">Edit bed</span><sup> (click on one to edit)</sup>
+                <div class="edit-bed">Edit bed <sup>(click on one to edit)</sup></div>
                 <form data-update-bed class="update-bed-form">
                     <label for="bed-update-name">Bed name</label>
                     <input type="text" id="bed-update-name" placeholder="Bed name" data-bed-name>
@@ -241,7 +256,7 @@
         </div>
         <div class="tables-container">
             <table>
-                <caption>Beds</caption>
+                <caption>Beds <sup>(click on a cell to edit)</sup></caption>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -252,215 +267,215 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-table-name-1></td>
-                        <td data-table-type-1></td>
-                        <td data-table-soil-characteristics-1></td>
-                        <td data-table-last-dug-1></td>
-                        <td data-table-last-crop-1></td>
+                    <tr data-tr-1 data-empty="true">
+                        <td><input data-table-name-1 data-empty="true"></td>
+                        <td><input data-table-type-1 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-1 data-empty="true"></td>
+                        <td><input data-table-last-dug-1 data-empty="true"></td>
+                        <td><input data-table-last-crop-1 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-2></td>
-                        <td data-table-type-2></td>
-                        <td data-table-soil-characteristics-2></td>
-                        <td data-table-last-dug-2></td>
-                        <td data-table-last-crop-2></td>
+                    <tr data-tr-2 data-empty="true">
+                        <td><input data-table-name-2 data-empty="true"></td>
+                        <td><input data-table-type-2 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-2 data-empty="true"></td>
+                        <td><input data-table-last-dug-2 data-empty="true"></td>
+                        <td><input data-table-last-crop-2 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-3></td>
-                        <td data-table-type-3></td>
-                        <td data-table-soil-characteristics-3></td>
-                        <td data-table-last-dug-3></td>
-                        <td data-table-last-crop-3></td>
+                    <tr data-tr-3 data-empty="true">
+                        <td><input data-table-name-3 data-empty="true"></td>
+                        <td><input data-table-type-3 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-3 data-empty="true"></td>
+                        <td><input data-table-last-dug-3 data-empty="true"></td>
+                        <td><input data-table-last-crop-3 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-4></td>
-                        <td data-table-type-4></td>
-                        <td data-table-soil-characteristics-4></td>
-                        <td data-table-last-dug-4></td>
-                        <td data-table-last-crop-4></td>
+                    <tr data-tr-4 data-empty="true">
+                        <td><input data-table-name-4 data-empty="true"></td>
+                        <td><input data-table-type-4 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-4 data-empty="true"></td>
+                        <td><input data-table-last-dug-4 data-empty="true"></td>
+                        <td><input data-table-last-crop-4 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-5></td>
-                        <td data-table-type-5></td>
-                        <td data-table-soil-characteristics-5></td>
-                        <td data-table-last-dug-5></td>
-                        <td data-table-last-crop-5></td>
+                    <tr data-tr-5 data-empty="true">
+                        <td><input data-table-name-5 data-empty="true"></td>
+                        <td><input data-table-type-5 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-5 data-empty="true"></td>
+                        <td><input data-table-last-dug-5 data-empty="true"></td>
+                        <td><input data-table-last-crop-5 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-6></td>
-                        <td data-table-type-6></td>
-                        <td data-table-soil-characteristics-6></td>
-                        <td data-table-last-dug-6></td>
-                        <td data-table-last-crop-6></td>
+                    <tr data-tr-6 data-empty="true">
+                        <td><input data-table-name-6 data-empty="true"></td>
+                        <td><input data-table-type-6 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-6 data-empty="true"></td>
+                        <td><input data-table-last-dug-6 data-empty="true"></td>
+                        <td><input data-table-last-crop-6 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-7></td>
-                        <td data-table-type-7></td>
-                        <td data-table-soil-characteristics-7></td>
-                        <td data-table-last-dug-7></td>
-                        <td data-table-last-crop-7></td>
+                    <tr data-tr-7 data-empty="true">
+                        <td><input data-table-name-7 data-empty="true"></td>
+                        <td><input data-table-type-7 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-7 data-empty="true"></td>
+                        <td><input data-table-last-dug-7 data-empty="true"></td>
+                        <td><input data-table-last-crop-7 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-8></td>
-                        <td data-table-type-8></td>
-                        <td data-table-soil-characteristics-8></td>
-                        <td data-table-last-dug-8></td>
-                        <td data-table-last-crop-8></td>
+                    <tr data-tr-8 data-empty="true">
+                        <td><input data-table-name-8 data-empty="true"></td>
+                        <td><input data-table-type-8 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-8 data-empty="true"></td>
+                        <td><input data-table-last-dug-8 data-empty="true"></td>
+                        <td><input data-table-last-crop-8 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-9></td>
-                        <td data-table-type-9></td>
-                        <td data-table-soil-characteristics-9></td>
-                        <td data-table-last-dug-9></td>
-                        <td data-table-last-crop-9></td>
+                    <tr data-tr-9 data-empty="true">
+                        <td><input data-table-name-9 data-empty="true"></td>
+                        <td><input data-table-type-9 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-9 data-empty="true"></td>
+                        <td><input data-table-last-dug-9 data-empty="true"></td>
+                        <td><input data-table-last-crop-9 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-10></td>
-                        <td data-table-type-10></td>
-                        <td data-table-soil-characteristics-10></td>
-                        <td data-table-last-dug-10></td>
-                        <td data-table-last-crop-10></td>
+                    <tr data-tr-10 data-empty="true">
+                        <td><input data-table-name-10 data-empty="true"></td>
+                        <td><input data-table-type-10 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-10 data-empty="true"></td>
+                        <td><input data-table-last-dug-10 data-empty="true"></td>
+                        <td><input data-table-last-crop-10 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-11></td>
-                        <td data-table-type-11></td>
-                        <td data-table-soil-characteristics-11></td>
-                        <td data-table-last-dug-11></td>
-                        <td data-table-last-crop-11></td>
+                    <tr data-tr-11 data-empty="true">
+                        <td><input data-table-name-11 data-empty="true"></td>
+                        <td><input data-table-type-11 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-11 data-empty="true"></td>
+                        <td><input data-table-last-dug-11 data-empty="true"></td>
+                        <td><input data-table-last-crop-11 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-12></td>
-                        <td data-table-type-12></td>
-                        <td data-table-soil-characteristics-12></td>
-                        <td data-table-last-dug-12></td>
-                        <td data-table-last-crop-12></td>
+                    <tr data-tr-12 data-empty="true">
+                        <td><input data-table-name-12 data-empty="true"></td>
+                        <td><input data-table-type-12 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-12 data-empty="true"></td>
+                        <td><input data-table-last-dug-12 data-empty="true"></td>
+                        <td><input data-table-last-crop-12 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-13></td>
-                        <td data-table-type-13></td>
-                        <td data-table-soil-characteristics-13></td>
-                        <td data-table-last-dug-13></td>
-                        <td data-table-last-crop-13></td>
+                    <tr data-tr-13 data-empty="true">
+                        <td><input data-table-name-13 data-empty="true"></td>
+                        <td><input data-table-type-13 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-13 data-empty="true"></td>
+                        <td><input data-table-last-dug-13 data-empty="true"></td>
+                        <td><input data-table-last-crop-13 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-14></td>
-                        <td data-table-type-14></td>
-                        <td data-table-soil-characteristics-14></td>
-                        <td data-table-last-dug-14></td>
-                        <td data-table-last-crop-14></td>
+                    <tr data-tr-14 data-empty="true">
+                        <td><input data-table-name-14 data-empty="true"></td>
+                        <td><input data-table-type-14 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-14 data-empty="true"></td>
+                        <td><input data-table-last-dug-14 data-empty="true"></td>
+                        <td><input data-table-last-crop-14 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-15></td>
-                        <td data-table-type-15></td>
-                        <td data-table-soil-characteristics-15></td>
-                        <td data-table-last-dug-15></td>
-                        <td data-table-last-crop-15></td>
+                    <tr data-tr-15 data-empty="true">
+                        <td><input data-table-name-15 data-empty="true"></td>
+                        <td><input data-table-type-15 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-15 data-empty="true"></td>
+                        <td><input data-table-last-dug-15 data-empty="true"></td>
+                        <td><input data-table-last-crop-15 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-16></td>
-                        <td data-table-type-16></td>
-                        <td data-table-soil-characteristics-16></td>
-                        <td data-table-last-dug-16></td>
-                        <td data-table-last-crop-16></td>
+                    <tr data-tr-16 data-empty="true">
+                        <td><input data-table-name-16 data-empty="true"></td>
+                        <td><input data-table-type-16 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-16 data-empty="true"></td>
+                        <td><input data-table-last-dug-16 data-empty="true"></td>
+                        <td><input data-table-last-crop-16 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-17></td>
-                        <td data-table-type-17></td>
-                        <td data-table-soil-characteristics-17></td>
-                        <td data-table-last-dug-17></td>
-                        <td data-table-last-crop-17></td>
+                    <tr data-tr-17 data-empty="true">
+                        <td><input data-table-name-17 data-empty="true"></td>
+                        <td><input data-table-type-17 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-17 data-empty="true"></td>
+                        <td><input data-table-last-dug-17 data-empty="true"></td>
+                        <td><input data-table-last-crop-17 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-18></td>
-                        <td data-table-type-18></td>
-                        <td data-table-soil-characteristics-18></td>
-                        <td data-table-last-dug-18></td>
-                        <td data-table-last-crop-18></td>
+                    <tr data-tr-18 data-empty="true">
+                        <td><input data-table-name-18 data-empty="true"></td>
+                        <td><input data-table-type-18 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-18 data-empty="true"></td>
+                        <td><input data-table-last-dug-18 data-empty="true"></td>
+                        <td><input data-table-last-crop-18 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-19></td>
-                        <td data-table-type-19></td>
-                        <td data-table-soil-characteristics-19></td>
-                        <td data-table-last-dug-19></td>
-                        <td data-table-last-crop-19></td>
+                    <tr data-tr-19 data-empty="true">
+                        <td><input data-table-name-19 data-empty="true"></td>
+                        <td><input data-table-type-19 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-19 data-empty="true"></td>
+                        <td><input data-table-last-dug-19 data-empty="true"></td>
+                        <td><input data-table-last-crop-19 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-20></td>
-                        <td data-table-type-20></td>
-                        <td data-table-soil-characteristics-20></td>
-                        <td data-table-last-dug-20></td>
-                        <td data-table-last-crop-20></td>
+                    <tr data-tr-20 data-empty="true">
+                        <td><input data-table-name-20 data-empty="true"></td>
+                        <td><input data-table-type-20 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-20 data-empty="true"></td>
+                        <td><input data-table-last-dug-20 data-empty="true"></td>
+                        <td><input data-table-last-crop-20 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-21></td>
-                        <td data-table-type-21></td>
-                        <td data-table-soil-characteristics-21></td>
-                        <td data-table-last-dug-21></td>
-                        <td data-table-last-crop-21></td>
+                    <tr data-tr-21 data-empty="true">
+                        <td><input data-table-name-21 data-empty="true"></td>
+                        <td><input data-table-type-21 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-21 data-empty="true"></td>
+                        <td><input data-table-last-dug-21 data-empty="true"></td>
+                        <td><input data-table-last-crop-21 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-22></td>
-                        <td data-table-type-22></td>
-                        <td data-table-soil-characteristics-22></td>
-                        <td data-table-last-dug-22></td>
-                        <td data-table-last-crop-22></td>
+                    <tr data-tr-22 data-empty="true">
+                        <td><input data-table-name-22 data-empty="true"></td>
+                        <td><input data-table-type-22 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-22 data-empty="true"></td>
+                        <td><input data-table-last-dug-22 data-empty="true"></td>
+                        <td><input data-table-last-crop-22 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-23></td>
-                        <td data-table-type-23></td>
-                        <td data-table-soil-characteristics-23></td>
-                        <td data-table-last-dug-23></td>
-                        <td data-table-last-crop-23></td>
+                    <tr data-tr-23 data-empty="true">
+                        <td><input data-table-name-23 data-empty="true"></td>
+                        <td><input data-table-type-23 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-23 data-empty="true"></td>
+                        <td><input data-table-last-dug-23 data-empty="true"></td>
+                        <td><input data-table-last-crop-23 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-24></td>
-                        <td data-table-type-24></td>
-                        <td data-table-soil-characteristics-24></td>
-                        <td data-table-last-dug-24></td>
-                        <td data-table-last-crop-24></td>
+                    <tr data-tr-24 data-empty="true">
+                        <td><input data-table-name-24 data-empty="true"></td>
+                        <td><input data-table-type-24 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-24 data-empty="true"></td>
+                        <td><input data-table-last-dug-24 data-empty="true"></td>
+                        <td><input data-table-last-crop-24 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-25></td>
-                        <td data-table-type-25></td>
-                        <td data-table-soil-characteristics-25></td>
-                        <td data-table-last-dug-25></td>
-                        <td data-table-last-crop-25></td>
+                    <tr data-tr-25 data-empty="true">
+                        <td><input data-table-name-25 data-empty="true"></td>
+                        <td><input data-table-type-25 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-25 data-empty="true"></td>
+                        <td><input data-table-last-dug-25 data-empty="true"></td>
+                        <td><input data-table-last-crop-25 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-26></td>
-                        <td data-table-type-26></td>
-                        <td data-table-soil-characteristics-26></td>
-                        <td data-table-last-dug-26></td>
-                        <td data-table-last-crop-26></td>
+                    <tr data-tr-26 data-empty="true">
+                        <td><input data-table-name-26 data-empty="true"></td>
+                        <td><input data-table-type-26 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-26 data-empty="true"></td>
+                        <td><input data-table-last-dug-26 data-empty="true"></td>
+                        <td><input data-table-last-crop-26 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-27></td>
-                        <td data-table-type-27></td>
-                        <td data-table-soil-characteristics-27></td>
-                        <td data-table-last-dug-27></td>
-                        <td data-table-last-crop-27></td>
+                    <tr data-tr-27 data-empty="true">
+                        <td><input data-table-name-27 data-empty="true"></td>
+                        <td><input data-table-type-27 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-27 data-empty="true"></td>
+                        <td><input data-table-last-dug-27 data-empty="true"></td>
+                        <td><input data-table-last-crop-27 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-28></td>
-                        <td data-table-type-28></td>
-                        <td data-table-soil-characteristics-28></td>
-                        <td data-table-last-dug-28></td>
-                        <td data-table-last-crop-28></td>
+                    <tr data-tr-28 data-empty="true">
+                        <td><input data-table-name-28 data-empty="true"></td>
+                        <td><input data-table-type-28 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-28 data-empty="true"></td>
+                        <td><input data-table-last-dug-28 data-empty="true"></td>
+                        <td><input data-table-last-crop-28 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-29></td>
-                        <td data-table-type-29></td>
-                        <td data-table-soil-characteristics-29></td>
-                        <td data-table-last-dug-29></td>
-                        <td data-table-last-crop-29></td>
+                    <tr data-tr-29 data-empty="true">
+                        <td><input data-table-name-29 data-empty="true"></td>
+                        <td><input data-table-type-29 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-29 data-empty="true"></td>
+                        <td><input data-table-last-dug-29 data-empty="true"></td>
+                        <td><input data-table-last-crop-29 data-empty="true"></td>
                     </tr>
-                    <tr>
-                        <td data-table-name-30></td>
-                        <td data-table-type-30></td>
-                        <td data-table-soil-characteristics-30></td>
-                        <td data-table-last-dug-30></td>
-                        <td data-table-last-crop-30></td>
+                    <tr data-tr-30 data-empty="true">
+                        <td><input data-table-name-30 data-empty="true"></td>
+                        <td><input data-table-type-30 data-empty="true"></td>
+                        <td><input data-table-soil-characteristics-30 data-empty="true"></td>
+                        <td><input data-table-last-dug-30 data-empty="true"></td>
+                        <td><input data-table-last-crop-30 data-empty="true"></td>
                     </tr>
                 </tbody>
             </table>

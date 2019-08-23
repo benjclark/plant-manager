@@ -107,9 +107,13 @@ httpRequests.get('/getBeds').then(response => {
                 isDragging: false
             });
             if(i <= 31) {
-                document.querySelector(`[data-table-name-${i}]`).textContent = obj.bed_name;
-                document.querySelector(`[data-table-type-${i}]`).textContent = obj.bed_type;
-                document.querySelector(`[data-table-soil-characteristics-${i}]`).textContent = obj.bed_soil_characteristics;
+                document.querySelector(`[data-table-name-${i}]`).setAttribute('value', obj.bed_name);
+                document.querySelector(`[data-table-type-${i}]`).setAttribute('value', obj.bed_type);
+                document.querySelector(`[data-table-soil-characteristics-${i}]`).setAttribute('value', obj.bed_soil_characteristics);
+                document.querySelector(`[data-table-name-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-table-type-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-table-soil-characteristics-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-tr-${i}]`).dataset.empty = "false";
                 i++;
             }
         });
