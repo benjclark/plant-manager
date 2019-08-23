@@ -1,8 +1,12 @@
+const connection = require('./secrets').connection;
+
 module.exports = {
   client: 'mysql',
   connection: {
-    user: 'root',
-    password: 'password',
-    database: 'plant_manager'
+    host: connection.host,
+    port: connection.port,
+    user: connection.user,
+    password: connection.password,
+    database: connection.database
   }
 };
