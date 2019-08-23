@@ -2,23 +2,6 @@ const httpRequests = require('./http-requests');
 
 $('[data-plant-date-planted]').datepicker({format: 'yyyy/mm/dd'});
 
-const bedsTable = {
-    names: getTableCellsFor('name'),
-    types: getTableCellsFor('type'),
-    soilCharacteristics: getTableCellsFor('soil-characteristics'),
-    lastDugs: getTableCellsFor('last-dug'),
-    lastVegs: getTableCellsFor('last-veg')
-};
-
-
-function getTableCellsFor(heading) {
-    const arrayResult = [];
-    for (let i = 0; i < 30; i++) {
-        arrayResult.push(document.querySelectorAll(`data-table-${heading}-${i}`));
-    }
-    return arrayResult;
-}
-
 function closeAllOverlays() {
     const overlays = document.querySelectorAll('.overlay');
     overlays.forEach(el => {el.classList.add('hidden')});
