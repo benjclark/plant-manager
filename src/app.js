@@ -2,6 +2,23 @@ const httpRequests = require('./http-requests');
 
 $('[data-plant-date-planted]').datepicker({format: 'yyyy/mm/dd'});
 
+const bedsTable = {
+    names: getTableCellsFor('name'),
+    types: getTableCellsFor('type'),
+    soilCharacteristics: getTableCellsFor('soil-characteristics'),
+    lastDugs: getTableCellsFor('last-dug'),
+    lastVegs: getTableCellsFor('last-veg')
+};
+
+
+function getTableCellsFor(heading) {
+    const arrayResult = [];
+    for (let i = 0; i < 30; i++) {
+        arrayResult.push(document.querySelectorAll(`data-table-${heading}-${i}`));
+    }
+    return arrayResult;
+}
+
 function closeAllOverlays() {
     const overlays = document.querySelectorAll('.overlay');
     overlays.forEach(el => {el.classList.add('hidden')});
@@ -92,6 +109,7 @@ document.querySelector('input[data-delete-bed]').addEventListener('click', event
 
 httpRequests.get('/getBeds').then(response => {
     response.json().then(data => {
+        let i = 1;
         data.forEach(obj => {
             window.plantManager.rectangles.push({
                 name: obj.bed_name,
@@ -104,6 +122,12 @@ httpRequests.get('/getBeds').then(response => {
                 bed_type: obj.bed_type,
                 isDragging: false
             });
+            if(i <= 31) {
+                document.querySelector(`[data-table-name-${i}]`).textContent = obj.bed_name;
+                document.querySelector(`[data-table-type-${i}]`).textContent = obj.bed_type;
+                document.querySelector(`[data-table-soil-characteristics-${i}]`).textContent = obj.bed_soil_characteristics;
+                i++;
+            }
         });
         window.plantManager.drawAll();
     });
