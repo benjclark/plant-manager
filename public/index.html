@@ -64,7 +64,6 @@
 
         .disp-flex-row {
             display: flex;
-            justify-content: space-between;
             flex-direction: row;
         }
 
@@ -162,14 +161,45 @@
             font-size: 20px;
             font-weight: 500;
         }
+        .horizontal-width-text {
+            text-align: center;
+            width: 540px;
+            margin-left: 33.59px;
+            height: 1px;
+            color: #ccc;
+        }
+        .vertical-height-text {
+            text-orientation: sideways;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-align: center;
+            width: 34px;
+            color: #ccc;
+        }
+        caption {
+            padding: initial;
+            text-align: center;
+            caption-side: initial;
+            color: initial;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        table, td, th {
+            border: 1px solid #ccc;
+        }
+        .tables-container {
+            margin-left: 40px;
+        }
     </style>
 </head>
 <body>
 <div class="manager-container">
     <h1>Plant manager</h1>
+    <div class="horizontal-width-text"><------------------------------ 540px width ----------------------------></div>
     <div class="disp-flex-row margin-top">
+        <div class="vertical-height-text"><---------------------------------------------- 800px height -----------------------------------------------></div>
         <canvas class="margin-right" width="540" height="800"></canvas>
-        <div class="width-100 disp-flex-column">
+        <div class="disp-flex-column">
             <div class="pos-relative">
                 <span class="plus-icon" data-add-button="bed"></span><span class="add-button">Bed</span>
             </div>
@@ -177,7 +207,6 @@
                 <span class="plus-icon" data-add-button="plant"></span><span class="add-button">Plant</span>
             </div>
             <button data-update-beds class="margin-top save-button">Save bed positions</button>
-
             <div class="margin-top">
                 <span class="edit-bed">Edit bed</span><sup> (click on one to edit)</sup>
                 <form data-update-bed class="update-bed-form">
@@ -204,9 +233,108 @@
                     <input type="text" id="bed-update-colour" placeholder="Colour hex" data-bed-colour>
                     <input type="submit" value="Save bed data" data-save-bed>
                     <input type="submit" value="Delete bed" data-delete-bed>
-
                 </form>
             </div>
+        </div>
+        <div class="tables-container">
+            <table>
+                <caption>Beds</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Soil characteristics</th>
+                        <th>Last dug</th>
+                        <th>Last crop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
