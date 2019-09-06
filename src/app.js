@@ -44,6 +44,16 @@ function updateBedRectInWindow() {
     bed.type = updateBedForm.querySelector('[data-bed-type]').value;
 }
 
+function populateBedDropdowns(bedObj) {
+    const name = bedObj.bed_name;
+    Array.prototype.slice.call(document.querySelectorAll('select[data-plant-bed]')).forEach(selectEl => {
+        const el = document.createElement('option');
+        el.setAttribute('value', name);
+        el.textContent = name;
+        selectEl.appendChild(el);
+    })
+}
+
 document.querySelector('form[data-create-plant]').addEventListener('submit', event => {
     event.preventDefault();
     httpRequests.sendCreatePlantRequest();
@@ -76,19 +86,32 @@ document.querySelector('input[data-delete-bed]').addEventListener('click', event
     window.plantManager.drawAll();
 });
 
-[].slice.call(document.querySelectorAll('[data-add-button]')).forEach(button => {
-    const value = button.dataset.addButton;
+[].slice.call(document.querySelectorAll('[data-open-overlay]')).forEach(button => {
+    const overlayName = button.dataset.openOverlay;
     button.addEventListener('click', event => {
-        document.querySelector(`div[data-add-${value}-overlay]`).classList.remove('hidden');
+        event.preventDefault();
+        document.querySelector(`div[data-${overlayName}-overlay]`).classList.remove('hidden');
     });
 });
 
-[].slice.call(document.querySelectorAll('[data-close-button]')).forEach(button => {
-    const value = button.dataset.closeButton;
+[].slice.call(document.querySelectorAll('[data-close-overlay]')).forEach(button => {
+    const overlayName = button.dataset.closeOverlay;
     button.addEventListener('click', event => {
-        document.querySelector(`div[data-add-${value}-overlay]`).classList.add('hidden');
+        event.preventDefault();
+        document.querySelector(`div[data-${overlayName}-overlay]`).classList.add('hidden');
     });
 });
+
+function drawAnImage() {
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image(300, 227);
+    image.onload = () => {
+        ctx.drawImage(this, 0, 0);
+    };
+    image.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+    // image.setAttribute('style', 'display:none');
+}
 
 httpRequests.get('/getBeds').then(response => {
     response.json().then(data => {
@@ -105,7 +128,7 @@ httpRequests.get('/getBeds').then(response => {
                 bed_type: obj.bed_type,
                 isDragging: false
             });
-            if(i <= 31) {
+            if(i < 32) {
                 document.querySelector(`[data-table-name-${i}]`).setAttribute('value', obj.bed_name);
                 document.querySelector(`[data-table-type-${i}]`).setAttribute('value', obj.bed_type);
                 document.querySelector(`[data-table-soil-characteristics-${i}]`).setAttribute('value', obj.bed_soil_characteristics);
@@ -115,7 +138,9 @@ httpRequests.get('/getBeds').then(response => {
                 document.querySelector(`[data-tr-${i}]`).dataset.empty = "false";
                 i++;
             }
+            populateBedDropdowns(obj);
         });
         window.plantManager.drawAll();
     });
 });
+drawAnImage();
