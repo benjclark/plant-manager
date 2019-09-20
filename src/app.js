@@ -140,34 +140,39 @@ httpRequests.get('/getBeds').then(response => {
             }
             populateBedDropdowns(obj);
         });
-        // window.plantManager.plants.push({
-        //     name: 'onion.svg',
-        //     x: 0,
-        //     y: 0,
-        //     width: 35,
-        //     height: 35,
-        //     bed: null,
-        //     type: null,
-        //     datePlanted: null,
-        //     lastCrop: null,
-        //     nextCrop: null,
-        //     isDragging: false,
-        //     imageFileName: 'onion.svg'
-        // });
-        // window.plantManager.plants.push({
-        //     name: 'potatoes.svg',
-        //     x: 200,
-        //     y: 200,
-        //     width: 35,
-        //     height: 35,
-        //     bed: null,
-        //     type: null,
-        //     datePlanted: null,
-        //     lastCrop: null,
-        //     nextCrop: null,
-        //     isDragging: false,
-        //     imageFileName: 'potatoes.svg'
-        // });
+        window.plantManager.drawAll();
+    });
+});
+
+httpRequests.get('/getPlants').then(response => {
+    response.json().then(data => {
+        let i = 1;
+        data.forEach(obj => {
+            window.plantManager.plants.push({
+                name: obj.plant_name,
+                bed: obj.plant_bed,
+                type: obj.plant_type,
+                datePlanted: obj.plant_date_planted,
+                lastCrop: obj.plant_last_crop,
+                nextCrop: obj.plant_next_crop,
+                imageFileName: obj.plant_icon,
+                x: 0,
+                y: 0,
+                width: 35,
+                height: 35,
+                isDragging: false
+            });
+            if(i < 32) {
+                document.querySelector(`[data-table-plant-name-${i}]`).setAttribute('value', obj.plant_name);
+                document.querySelector(`[data-table-plant-bed-${i}]`).setAttribute('value', obj.plant_bed);
+                document.querySelector(`[data-table-plant-type-${i}]`).setAttribute('value', obj.plant_type);
+                document.querySelector(`[data-table-plant-date-planted-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-table-plant-last-crop-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-table-plant-next-crop-${i}]`).dataset.empty = "false";
+                document.querySelector(`[data-plant-tr-${i}]`).dataset.empty = "false";
+                i++;
+            }
+        });
         window.plantManager.drawAll();
     });
 });
