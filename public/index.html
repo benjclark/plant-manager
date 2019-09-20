@@ -8,19 +8,21 @@
     <title>Allotment Manager</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
     <style>
         .manager-container {
             padding: 10px 0 0 80px;
         }
 
         h1, h2 {
-            margin: 0;
             font-size: 1.6rem;
         }
 
+        h1 {
+            margin: 0 0 20px 0;
+        }
+
         h2 {
+            margin: 0;
             font-size: 1.2rem;
         }
 
@@ -190,7 +192,7 @@
 
         .horizontal-width-text {
             text-align: center;
-            width: 540px;
+            width: 300px;
             margin-left: 33.59px;
             height: 1px;
             color: #ccc;
@@ -256,10 +258,10 @@
 <body>
 <div class="manager-container">
     <h1>Allotment manager</h1>
-    <div class="horizontal-width-text"><------------------------------ 540px width ----------------------------></div>
+    <div class="horizontal-width-text"><--------------- 8 metres -------------></div>
     <div class="disp-flex-row margin-top">
-        <div class="vertical-height-text"><---------------------------------------------- 800px height -----------------------------------------------></div>
-        <canvas class="margin-right" width="540" height="800"></canvas>
+        <div class="vertical-height-text"><------------------------------------------------ 36 metres ------------------------------------------------></div>
+        <canvas class="margin-right" width="300" height="800"></canvas>
         <div class="disp-flex-column">
             <div class="pos-relative">
                 <span class="plus-icon" data-open-overlay="bed"></span><span class="add-button">Bed</span>
@@ -794,14 +796,14 @@
             </select>
             <label for="plant-date-planted">Date planted</label>
             <input type="date" id="plant-date-planted" data-plant-date-planted>
-            <label for="plant-next-crop">Date of next crop</label>
-            <input type="date" id="plant-next-crop" data-plant-next-crop>
             <label for="plant-last-crop">Date of last crop</label>
             <input type="date" id="plant-last-crop" data-plant-last-crop>
+            <label for="plant-next-crop">Date of next crop</label>
+            <input type="date" id="plant-next-crop" data-plant-next-crop>
             <label for="plant-icon">Icon</label>
             <select name="plant-icon" data-plant-icon id="plant-icon">
-                <option value="Potato">Potato</option>
-                <option value="Onion">Onion</option>
+                <option value="potato.svg">Potato</option>
+                <option value="onion.svg">Onion</option>
             </select>
             <input type="submit" value="Create plant">
         </form>

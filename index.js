@@ -6,17 +6,6 @@ const retrieve = require('./retrieve');
 const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.post('/createPlant', (req, res) => {
-    store
-        .createPlant({
-            plant_name: req.body.plant_name,
-            date_planted: req.body.date_planted
-        })
-        .then(() => {
-            console.log('Create plant http post:\n', req.body);
-            res.sendStatus(200);
-        })
-});
 app.post('/createBed', (req, res) => {
     store
         .createBed({
@@ -34,12 +23,38 @@ app.post('/createBed', (req, res) => {
             res.sendStatus(200);
         })
 });
+app.post('/createPlant', (req, res) => {
+    store
+        .createPlant({
+            plant_name: req.body.plant_name,
+            plant_bed: req.body.plant_bed,
+            plant_type: req.body.plant_type,
+            plant_date_planted: req.body.plant_date_planted,
+            plant_last_crop: req.body.plant_last_crop,
+            plant_next_crop: req.body.plant_next_crop,
+            plant_icon: req.body.plant_icon
+        })
+        .then(() => {
+            console.log('Create plant http post:\n', req.body);
+            res.sendStatus(200);
+        })
+});
 app.post('/updateBedPosition', (req, res) => {
     store
         .updateBedPosition({
             bed_name: req.body.bed_name,
             bed_x: req.body.bed_x,
             bed_y: req.body.bed_y
+        })
+        .then(() => {
+            res.sendStatus(200);
+        })
+});
+app.post('/updatePlantBed', (req, res) => {
+    store
+        .updateBedPosition({
+            plant_name: req.body.plant_name,
+            plant_bed: req.body.plant_bed,
         })
         .then(() => {
             res.sendStatus(200);
@@ -59,6 +74,21 @@ app.post('/updateBed', (req, res) => {
             res.sendStatus(200);
         })
 });
+app.post('/updatePlant', (req, res) => {
+    store
+        .updatePlant({
+            plant_name: req.body.plant_name,
+            plant_bed: req.body.plant_bed,
+            plant_type: req.body.plant_type,
+            plant_date_planted: req.body.plant_date_planted,
+            plant_last_crop: req.body.plant_last_crop,
+            plant_next_crop: req.body.plant_next_crop,
+            plant_icon: req.body.plant_icon
+        })
+        .then(() => {
+            res.sendStatus(200);
+        })
+});
 app.post('/deleteBed', (req, res) => {
     store
         .deleteBed({
@@ -68,8 +98,23 @@ app.post('/deleteBed', (req, res) => {
             res.sendStatus(200);
         })
 });
+app.post('/deletePlant', (req, res) => {
+    store
+        .deletePlant({
+            plant_name: req.body.plant_name
+        })
+        .then(() => {
+            res.sendStatus(200);
+        })
+});
 app.get('/getBeds', (req, res) => {
     retrieve.getBeds()
+        .then((response) => {
+            res.send(response)
+        })
+});
+app.get('/getPlants', (req, res) => {
+    retrieve.getPlants()
         .then((response) => {
             res.send(response)
         })

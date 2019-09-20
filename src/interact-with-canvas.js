@@ -4,7 +4,7 @@ const drawOnCanvas = require('./draw-on-canvas');
 const canvas = document.querySelector('canvas');
 const canvasContext = canvas.getContext('2d');
 
-function renderEditBedFormForCurrentlySelectedRect() {
+function renderEditFormForCurrentlySelectedBed() {
     const currentSelected = window.plantManager.mouseEventVariables.currentRectSelected;
     if (!currentSelected) {
         return;
@@ -17,7 +17,6 @@ function renderEditBedFormForCurrentlySelectedRect() {
     const fill = currentSelected.fill;
     const soilCharacteristics = currentSelected.soil_characteristics;
     const type = currentSelected.bed_type;
-
 
     updateBedForm.querySelector('[data-bed-name]').value = name;
     updateBedForm.querySelector('[data-bed-width]').value = width;
@@ -32,7 +31,7 @@ window.plantManager = {
     canvasOffsetY: canvas.getBoundingClientRect().top,
     beds: [],
     plants: [],
-    renderEditBedFormForCurrentlySelectedRect: renderEditBedFormForCurrentlySelectedRect
+    renderEditFormForCurrentlySelectedBed: renderEditFormForCurrentlySelectedBed
 };
 const pm = window.plantManager;
 

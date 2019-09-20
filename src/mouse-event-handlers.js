@@ -12,6 +12,9 @@ function mouseUpHandler(e) {
     for (let z = 0; z < pm.beds.length; z++) {
         pm.beds[z].isDragging = false;
     }
+    for (let z = 0; z < pm.plants.length; z++) {
+        pm.plants[z].isDragging = false;
+    }
 }
 
 function mouseDownHandler(e) {
@@ -29,13 +32,24 @@ function mouseDownHandler(e) {
 
     // test each rect to see if mouse is inside
     for (let i = (pm.beds.length - 1); i >= 0; i--) {
-        const r = pm.beds[i];
-        if (mx > parseInt(r.x, 10) && mx < parseInt(r.x, 10) + parseInt(r.width, 10) && my > parseInt(r.y, 10) && my < parseInt(r.y, 10) + parseInt(r.height, 10)) {
+        const b = pm.beds[i];
+        if (mx > parseInt(b.x, 10) && mx < parseInt(b.x, 10) + parseInt(b.width, 10) && my > parseInt(b.y, 10) && my < parseInt(b.y, 10) + parseInt(b.height, 10)) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
-            mouseEventVars.currentRectSelected = r;
-            r.isDragging = true;
-            pm.renderEditBedFormForCurrentlySelectedRect();
+            mouseEventVars.currentRectSelected = b;
+            b.isDragging = true;
+            pm.renderEditFormForCurrentlySelectedBed();
+            break;
+        }
+    }
+    for (let i = (pm.plants.length - 1); i >= 0; i--) {
+        const p = pm.plants[i];
+        if (mx > parseInt(p.x, 10) && mx < parseInt(p.x, 10) + parseInt(p.width, 10) && my > parseInt(p.y, 10) && my < parseInt(p.y, 10) + parseInt(p.height, 10)) {
+            // if yes, set that rects isDragging=true
+            mouseEventVars.somethingIsBeingDragged = true;
+            mouseEventVars.currentRectSelected = p;
+            p.isDragging = true;
+            // pm.renderEditFormForCurrentlySelectedPlant();   <--- TODO
             break;
         }
     }
@@ -65,10 +79,18 @@ function mouseMoveHandler(e) {
         // by the distance the mouse has moved
         // since the last mousemove
         for (let i = 0; i < pm.beds.length; i++) {
-            const r = pm.beds[i];
-            if (r.isDragging) {
-                r.x += dx;
-                r.y += dy;
+            const b = pm.beds[i];
+            if (b.isDragging) {
+                b.x += dx;
+                b.y += dy;
+            }
+        }
+
+        for (let i = 0; i < pm.plants.length; i++) {
+            const p = pm.plants[i];
+            if (p.isDragging) {
+                p.x += dx;
+                p.y += dy;
             }
         }
 

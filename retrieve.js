@@ -7,5 +7,12 @@ module.exports = {
                 console.log(err);
                 throw err
             })
+    },
+    getPlants() {
+        return knex.select().table('plants')
+            .catch((err) => {
+                console.log(err);
+                throw err
+            })
     }
 };

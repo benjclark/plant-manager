@@ -1,8 +1,13 @@
 function sendCreatePlantRequest() {
     const createPlantForm = document.querySelector('form[data-create-plant]');
     const plant_name = createPlantForm.querySelector('input[data-plant-name]').value;
-    const date_planted = createPlantForm.querySelector('input[data-plant-date-planted]').value;
-    post('/createPlant', {plant_name, date_planted});
+    const plant_bed = createPlantForm.querySelector('select[data-plant-bed]').value;
+    const plant_type = createPlantForm.querySelector('select[data-plant-type]').value;
+    const plant_date_planted = createPlantForm.querySelector('input[data-plant-date-planted]').value;
+    const plant_last_crop = createPlantForm.querySelector('input[data-plant-last-crop]').value;
+    const plant_next_crop = createPlantForm.querySelector('input[data-plant-next-crop]').value;
+    const plant_icon = createPlantForm.querySelector('select[data-plant-icon]').value;
+    post('/createPlant', {plant_name, plant_bed, plant_type, plant_date_planted, plant_last_crop, plant_next_crop, plant_icon});
 }
 
 function sendCreateBedRequest() {
@@ -25,6 +30,13 @@ function sendSaveAllBedPositionsRequest() {
     }
 }
 
+function sendSaveAllPlantBeds() {
+    const pm = window.plantManager;
+    for (let z = 0; z < pm.plants.length; z++) {
+        post('/updatePlantBed',{plant_name: pm.plants[z].name, plant_bed: pm.plants[z].bed});
+    }
+}
+
 function sendSaveBedRequest() {
     const updateBedForm = document.querySelector('form[data-update-bed]');
     const name = updateBedForm.querySelector('[data-bed-name]').value;
@@ -36,13 +48,34 @@ function sendSaveBedRequest() {
     post('/updateBed',{bed_name: name, bed_soil_characteristics: soilCharacteristics, bed_type: type, bed_width: width, bed_height: height, bed_colour: fill});
 }
 
+function sendSavePlantRequest() {
+    const updatePlantForm = document.querySelector('form[data-update-plant]');
+    const name = updatePlantForm.querySelector('[data-plant-name]').value;
+    const bed = updatePlantForm.querySelector('[data-plant-bed]').value;
+    const type = updatePlantForm.querySelector('[data-plant-type]').value;
+    const datePlanted = updatePlantForm.querySelector('[data-plant-date-planted]').value;
+    const lastCrop = updatePlantForm.querySelector('[data-plant-last-crop]').value;
+    const nextCrop = updatePlantForm.querySelector('[data-plant-next-crop]').value;
+    const icon = updatePlantForm.querySelector('[data-plant-icon]').value;
+    post('/updatePlant',{plant_name: name, plant_bed: bed, plant_type: type, plant_date_planted: datePlanted, plant_last_crop: lastCrop, plant_next_crop: nextCrop, plant_icon: icon});
+}
+
 function sendDeleteBedRequest() {
     const updateBedForm = document.querySelector('form[data-update-bed]');
     const name = updateBedForm.querySelector('[data-bed-name]').value;
-    window.plantManager.rectangles = window.plantManager.rectangles.filter(obj => {
+    window.plantManager.beds = window.plantManager.beds.filter(obj => {
         return obj.name !== name;
     });
     post('/deleteBed',{bed_name: name});
+}
+
+function sendDeletePlantRequest() {
+    const updatePlantForm = document.querySelector('form[data-update-plant]');
+    const name = updatePlantForm.querySelector('[data-plant-name]').value;
+    window.plantManager.plants = window.plantManager.plants.filter(obj => {
+        return obj.name !== name;
+    });
+    post('/deletePlant',{plant_name: name});
 }
 
 function post(path, data) {
@@ -72,8 +105,11 @@ module.exports = {
     sendCreatePlantRequest,
     sendCreateBedRequest,
     sendSaveAllBedPositionsRequest,
+    sendSaveAllPlantBeds,
     sendSaveBedRequest,
+    sendSavePlantRequest,
     sendDeleteBedRequest,
+    sendDeletePlantRequest,
     get,
     post
 };

@@ -1,7 +1,5 @@
 const httpRequests = require('./http-requests');
 
-$('[data-plant-date-planted]').datepicker({format: 'yyyy/mm/dd'});
-
 function closeAllOverlays() {
     const overlays = document.querySelectorAll('.overlay');
     overlays.forEach(el => {el.classList.add('hidden')});
@@ -21,8 +19,8 @@ function createBedRectInWindow() {
     const createBedForm = document.querySelector('form[data-create-bed]');
     window.plantManager.beds.push({
         name: createBedForm.querySelector('input[data-bed-name]').value,
-        x: 200,
-        y: 300,
+        x: 50,
+        y: 50,
         width: createBedForm.querySelector('input[data-bed-width]').value,
         height: createBedForm.querySelector('input[data-bed-height]').value,
         fill: createBedForm.querySelector('input[data-bed-colour]').value,
@@ -71,6 +69,7 @@ document.querySelector('form[data-create-bed]').addEventListener('submit', event
 document.querySelector('button[data-update-beds]').addEventListener('click', event => {
     event.preventDefault();
     httpRequests.sendSaveAllBedPositionsRequest();
+    httpRequests.sendSaveAllPlantBeds();
 });
 
 document.querySelector('input[data-save-bed]').addEventListener('click', event => {
@@ -80,9 +79,21 @@ document.querySelector('input[data-save-bed]').addEventListener('click', event =
     window.plantManager.drawAll();
 });
 
+document.querySelector('input[data-save-plant]').addEventListener('click', event => {
+    event.preventDefault();
+    httpRequests.sendSavePlantRequest();
+    window.plantManager.drawAll();
+});
+
 document.querySelector('input[data-delete-bed]').addEventListener('click', event => {
     event.preventDefault();
     httpRequests.sendDeleteBedRequest();
+    window.plantManager.drawAll();
+});
+
+document.querySelector('input[data-delete-plant]').addEventListener('click', event => {
+    event.preventDefault();
+    httpRequests.sendDeletePlantRequest();
     window.plantManager.drawAll();
 });
 
@@ -101,31 +112,6 @@ document.querySelector('input[data-delete-bed]').addEventListener('click', event
         document.querySelector(`div[data-${overlayName}-overlay]`).classList.add('hidden');
     });
 });
-
-function drawAnImage(fileName) {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const image = new Image();
-    image.src = `/${fileName}`;
-    image.onload = () => {
-        ctx.drawImage(image, 0, 0, 100, 100);
-    };
-    window.plantManager.plants.push({
-        name: fileName,
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        fill: 'rgba(255, 255, 255, 0.40)',
-        bed: null,
-        type: null,
-        datePlanted: null,
-        lastCrop: null,
-        nextCrop: null,
-        isDragging: false,
-        imageFileName: fileName
-    })
-}
 
 httpRequests.get('/getBeds').then(response => {
     response.json().then(data => {
@@ -154,9 +140,34 @@ httpRequests.get('/getBeds').then(response => {
             }
             populateBedDropdowns(obj);
         });
+        // window.plantManager.plants.push({
+        //     name: 'onion.svg',
+        //     x: 0,
+        //     y: 0,
+        //     width: 35,
+        //     height: 35,
+        //     bed: null,
+        //     type: null,
+        //     datePlanted: null,
+        //     lastCrop: null,
+        //     nextCrop: null,
+        //     isDragging: false,
+        //     imageFileName: 'onion.svg'
+        // });
+        // window.plantManager.plants.push({
+        //     name: 'potatoes.svg',
+        //     x: 200,
+        //     y: 200,
+        //     width: 35,
+        //     height: 35,
+        //     bed: null,
+        //     type: null,
+        //     datePlanted: null,
+        //     lastCrop: null,
+        //     nextCrop: null,
+        //     isDragging: false,
+        //     imageFileName: 'potatoes.svg'
+        // });
         window.plantManager.drawAll();
-        drawAnImage('onion.svg');
-        window.plantManager.drawAll();
-
     });
 });

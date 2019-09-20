@@ -5,12 +5,22 @@ function clearCanvas() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawRectangle(x, y, w, h) {
+function drawBed(x, y, w, h) {
     const canvasContext = document.querySelector('canvas').getContext('2d');
     canvasContext.beginPath();
     canvasContext.rect(x, y, w, h);
     canvasContext.closePath();
     canvasContext.fill();
+}
+
+function drawPlant(x, y, w, h, fileName) {
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    image.src = `/${fileName}`;
+    image.onload = () => {
+        ctx.drawImage(image, x, y, w, h);
+    };
 }
 
 function drawAll() {
@@ -19,17 +29,21 @@ function drawAll() {
     const canvasContext = canvas.getContext('2d');
     clearCanvas();
     canvasContext.fillStyle = "#af865d3d";
-    drawRectangle(0, 0, canvas.width, canvas.height);
+    drawBed(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < pm.beds.length; i++) {
-        const r = pm.beds[i];
-        canvasContext.fillStyle = r.fill;
-        drawRectangle(r.x, r.y, r.width, r.height);
+        const b = pm.beds[i];
+        canvasContext.fillStyle = b.fill;
+        drawBed(b.x, b.y, b.width, b.height);
+    }
+    for (let i = 0; i < pm.plants.length; i++) {
+        const p = pm.plants[i];
+        drawPlant(p.x, p.y, p.width, p.height, p.imageFileName);
     }
 }
 
 module.exports = {
     clearCanvas,
-    drawRectangle,
+    drawBed,
     drawAll
 };
 
@@ -40,7 +54,7 @@ const drawOnCanvas = require('./draw-on-canvas');
 const canvas = document.querySelector('canvas');
 const canvasContext = canvas.getContext('2d');
 
-function renderEditBedFormForCurrentlySelectedRect() {
+function renderEditFormForCurrentlySelectedBed() {
     const currentSelected = window.plantManager.mouseEventVariables.currentRectSelected;
     if (!currentSelected) {
         return;
@@ -53,7 +67,6 @@ function renderEditBedFormForCurrentlySelectedRect() {
     const fill = currentSelected.fill;
     const soilCharacteristics = currentSelected.soil_characteristics;
     const type = currentSelected.bed_type;
-
 
     updateBedForm.querySelector('[data-bed-name]').value = name;
     updateBedForm.querySelector('[data-bed-width]').value = width;
@@ -68,7 +81,7 @@ window.plantManager = {
     canvasOffsetY: canvas.getBoundingClientRect().top,
     beds: [],
     plants: [],
-    renderEditBedFormForCurrentlySelectedRect: renderEditBedFormForCurrentlySelectedRect
+    renderEditFormForCurrentlySelectedBed: renderEditFormForCurrentlySelectedBed
 };
 const pm = window.plantManager;
 
@@ -98,6 +111,9 @@ function mouseUpHandler(e) {
     for (let z = 0; z < pm.beds.length; z++) {
         pm.beds[z].isDragging = false;
     }
+    for (let z = 0; z < pm.plants.length; z++) {
+        pm.plants[z].isDragging = false;
+    }
 }
 
 function mouseDownHandler(e) {
@@ -115,13 +131,24 @@ function mouseDownHandler(e) {
 
     // test each rect to see if mouse is inside
     for (let i = (pm.beds.length - 1); i >= 0; i--) {
-        const r = pm.beds[i];
-        if (mx > parseInt(r.x, 10) && mx < parseInt(r.x, 10) + parseInt(r.width, 10) && my > parseInt(r.y, 10) && my < parseInt(r.y, 10) + parseInt(r.height, 10)) {
+        const b = pm.beds[i];
+        if (mx > parseInt(b.x, 10) && mx < parseInt(b.x, 10) + parseInt(b.width, 10) && my > parseInt(b.y, 10) && my < parseInt(b.y, 10) + parseInt(b.height, 10)) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
-            mouseEventVars.currentRectSelected = r;
-            r.isDragging = true;
-            pm.renderEditBedFormForCurrentlySelectedRect();
+            mouseEventVars.currentRectSelected = b;
+            b.isDragging = true;
+            pm.renderEditFormForCurrentlySelectedBed();
+            break;
+        }
+    }
+    for (let i = (pm.plants.length - 1); i >= 0; i--) {
+        const p = pm.plants[i];
+        if (mx > parseInt(p.x, 10) && mx < parseInt(p.x, 10) + parseInt(p.width, 10) && my > parseInt(p.y, 10) && my < parseInt(p.y, 10) + parseInt(p.height, 10)) {
+            // if yes, set that rects isDragging=true
+            mouseEventVars.somethingIsBeingDragged = true;
+            mouseEventVars.currentRectSelected = p;
+            p.isDragging = true;
+            // pm.renderEditFormForCurrentlySelectedPlant();   <--- TODO
             break;
         }
     }
@@ -151,10 +178,18 @@ function mouseMoveHandler(e) {
         // by the distance the mouse has moved
         // since the last mousemove
         for (let i = 0; i < pm.beds.length; i++) {
-            const r = pm.beds[i];
-            if (r.isDragging) {
-                r.x += dx;
-                r.y += dy;
+            const b = pm.beds[i];
+            if (b.isDragging) {
+                b.x += dx;
+                b.y += dy;
+            }
+        }
+
+        for (let i = 0; i < pm.plants.length; i++) {
+            const p = pm.plants[i];
+            if (p.isDragging) {
+                p.x += dx;
+                p.y += dy;
             }
         }
 
