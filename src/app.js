@@ -8,10 +8,10 @@ function closeAllOverlays() {
 }
 
 function retrieveBedFromWindowObject(name) {
-    const rectangles = window.plantManager.rectangles;
-    for (let i = 0; i < rectangles.length; i++) {
-        if (rectangles[i].name === name) {
-            return rectangles[i];
+    const beds = window.plantManager.beds;
+    for (let i = 0; i < beds.length; i++) {
+        if (beds[i].name === name) {
+            return beds[i];
         }
     }
 
@@ -19,7 +19,7 @@ function retrieveBedFromWindowObject(name) {
 
 function createBedRectInWindow() {
     const createBedForm = document.querySelector('form[data-create-bed]');
-    window.plantManager.rectangles.push({
+    window.plantManager.beds.push({
         name: createBedForm.querySelector('input[data-bed-name]').value,
         x: 200,
         y: 300,
@@ -102,22 +102,36 @@ document.querySelector('input[data-delete-bed]').addEventListener('click', event
     });
 });
 
-function drawAnImage() {
+function drawAnImage(fileName) {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    const image = new Image(300, 227);
+    const image = new Image();
+    image.src = `/${fileName}`;
     image.onload = () => {
-        ctx.drawImage(this, 0, 0);
+        ctx.drawImage(image, 0, 0, 100, 100);
     };
-    image.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
-    // image.setAttribute('style', 'display:none');
+    window.plantManager.plants.push({
+        name: fileName,
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        fill: 'rgba(255, 255, 255, 0.40)',
+        bed: null,
+        type: null,
+        datePlanted: null,
+        lastCrop: null,
+        nextCrop: null,
+        isDragging: false,
+        imageFileName: fileName
+    })
 }
 
 httpRequests.get('/getBeds').then(response => {
     response.json().then(data => {
         let i = 1;
         data.forEach(obj => {
-            window.plantManager.rectangles.push({
+            window.plantManager.beds.push({
                 name: obj.bed_name,
                 x: obj.bed_x,
                 y: obj.bed_y,
@@ -126,7 +140,7 @@ httpRequests.get('/getBeds').then(response => {
                 fill: obj.bed_colour,
                 soil_characteristics: obj.bed_soil_characteristics,
                 bed_type: obj.bed_type,
-                isDragging: false
+                isDragging: false,
             });
             if(i < 32) {
                 document.querySelector(`[data-table-name-${i}]`).setAttribute('value', obj.bed_name);
@@ -141,6 +155,8 @@ httpRequests.get('/getBeds').then(response => {
             populateBedDropdowns(obj);
         });
         window.plantManager.drawAll();
+        drawAnImage('onion.svg');
+        window.plantManager.drawAll();
+
     });
 });
-drawAnImage();

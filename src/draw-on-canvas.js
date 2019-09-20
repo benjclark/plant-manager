@@ -19,8 +19,8 @@ function drawAll() {
     clearCanvas();
     canvasContext.fillStyle = "#af865d3d";
     drawRectangle(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < pm.rectangles.length; i++) {
-        const r = pm.rectangles[i];
+    for (let i = 0; i < pm.beds.length; i++) {
+        const r = pm.beds[i];
         canvasContext.fillStyle = r.fill;
         drawRectangle(r.x, r.y, r.width, r.height);
     }

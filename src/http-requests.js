@@ -20,8 +20,8 @@ function sendCreateBedRequest() {
 
 function sendSaveAllBedPositionsRequest() {
     const pm = window.plantManager;
-    for (let z = 0; z < pm.rectangles.length; z++) {
-        post('/updateBedPosition',{bed_name: pm.rectangles[z].name, bed_x: pm.rectangles[z].x, bed_y: pm.rectangles[z].y});
+    for (let z = 0; z < pm.beds.length; z++) {
+        post('/updateBedPosition',{bed_name: pm.beds[z].name, bed_x: pm.beds[z].x, bed_y: pm.beds[z].y});
     }
 }
 

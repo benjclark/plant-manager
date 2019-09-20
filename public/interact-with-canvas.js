@@ -20,8 +20,8 @@ function drawAll() {
     clearCanvas();
     canvasContext.fillStyle = "#af865d3d";
     drawRectangle(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < pm.rectangles.length; i++) {
-        const r = pm.rectangles[i];
+    for (let i = 0; i < pm.beds.length; i++) {
+        const r = pm.beds[i];
         canvasContext.fillStyle = r.fill;
         drawRectangle(r.x, r.y, r.width, r.height);
     }
@@ -32,6 +32,7 @@ module.exports = {
     drawRectangle,
     drawAll
 };
+
 },{}],2:[function(require,module,exports){
 const mouseEventHandlers = require('./mouse-event-handlers');
 const drawOnCanvas = require('./draw-on-canvas');
@@ -65,7 +66,8 @@ function renderEditBedFormForCurrentlySelectedRect() {
 window.plantManager = {
     canvasOffsetX: canvas.getBoundingClientRect().left,
     canvasOffsetY: canvas.getBoundingClientRect().top,
-    rectangles: [],
+    beds: [],
+    plants: [],
     renderEditBedFormForCurrentlySelectedRect: renderEditBedFormForCurrentlySelectedRect
 };
 const pm = window.plantManager;
@@ -80,6 +82,7 @@ canvas.onmousemove = mouseEventHandlers.mouseMoveHandler;
 
 drawOnCanvas.drawAll();
 pm.drawAll = drawOnCanvas.drawAll;
+
 },{"./draw-on-canvas":1,"./mouse-event-handlers":3}],3:[function(require,module,exports){
 const drawOnCanvas = require('./draw-on-canvas');
 
@@ -92,8 +95,8 @@ function mouseUpHandler(e) {
     // clear all the dragging flags
     mouseEventVars.somethingIsBeingDragged = false;
 
-    for (let z = 0; z < pm.rectangles.length; z++) {
-        pm.rectangles[z].isDragging = false;
+    for (let z = 0; z < pm.beds.length; z++) {
+        pm.beds[z].isDragging = false;
     }
 }
 
@@ -111,8 +114,8 @@ function mouseDownHandler(e) {
     mouseEventVars.somethingIsBeingDragged = false;
 
     // test each rect to see if mouse is inside
-    for (let i = (pm.rectangles.length - 1); i >= 0; i--) {
-        const r = pm.rectangles[i];
+    for (let i = (pm.beds.length - 1); i >= 0; i--) {
+        const r = pm.beds[i];
         if (mx > parseInt(r.x, 10) && mx < parseInt(r.x, 10) + parseInt(r.width, 10) && my > parseInt(r.y, 10) && my < parseInt(r.y, 10) + parseInt(r.height, 10)) {
             // if yes, set that rects isDragging=true
             mouseEventVars.somethingIsBeingDragged = true;
@@ -147,8 +150,8 @@ function mouseMoveHandler(e) {
         // move each rect that isDragging
         // by the distance the mouse has moved
         // since the last mousemove
-        for (let i = 0; i < pm.rectangles.length; i++) {
-            const r = pm.rectangles[i];
+        for (let i = 0; i < pm.beds.length; i++) {
+            const r = pm.beds[i];
             if (r.isDragging) {
                 r.x += dx;
                 r.y += dy;
@@ -179,6 +182,7 @@ module.exports = {
     mouseMoveHandler,
     setupMouseEventVariables
 };
+
 },{"./draw-on-canvas":1}]},{},[2])
 
 //# sourceMappingURL=interact-with-canvas.js.map

@@ -30,7 +30,8 @@ function renderEditBedFormForCurrentlySelectedRect() {
 window.plantManager = {
     canvasOffsetX: canvas.getBoundingClientRect().left,
     canvasOffsetY: canvas.getBoundingClientRect().top,
-    rectangles: [],
+    beds: [],
+    plants: [],
     renderEditBedFormForCurrentlySelectedRect: renderEditBedFormForCurrentlySelectedRect
 };
 const pm = window.plantManager;
