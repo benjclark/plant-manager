@@ -3,9 +3,9 @@ function sendCreatePlantRequest() {
     const plant_name = createPlantForm.querySelector('input[data-plant-name]').value;
     const plant_bed = createPlantForm.querySelector('select[data-plant-bed]').value;
     const plant_type = createPlantForm.querySelector('select[data-plant-type]').value;
-    const plant_date_planted = createPlantForm.querySelector('input[data-plant-date-planted]').value;
-    const plant_last_crop = createPlantForm.querySelector('input[data-plant-last-crop]').value;
-    const plant_next_crop = createPlantForm.querySelector('input[data-plant-next-crop]').value;
+    const plant_date_planted = createPlantForm.querySelector('input[data-plant-date-planted]').value ? createPlantForm.querySelector('input[data-plant-date-planted]').value : '2019-01-01';
+    const plant_last_crop = createPlantForm.querySelector('input[data-plant-last-crop]').value ? createPlantForm.querySelector('input[data-plant-last-crop]').value : '2019-01-01';
+    const plant_next_crop = createPlantForm.querySelector('input[data-plant-next-crop]').value ? createPlantForm.querySelector('input[data-plant-next-crop]').value : '2019-01-01';
     const plant_icon = createPlantForm.querySelector('select[data-plant-icon]').value;
     post('/createPlant', {plant_name, plant_bed, plant_type, plant_date_planted, plant_last_crop, plant_next_crop, plant_icon});
 }

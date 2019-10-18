@@ -49,7 +49,7 @@ function mouseDownHandler(e) {
             mouseEventVars.somethingIsBeingDragged = true;
             mouseEventVars.currentRectSelected = p;
             p.isDragging = true;
-            // pm.renderEditFormForCurrentlySelectedPlant();   <--- TODO
+            pm.renderEditFormForCurrentlySelectedPlant();
             break;
         }
     }

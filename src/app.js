@@ -23,8 +23,8 @@ function createBedRectInWindow() {
         width: createBedForm.querySelector('input[data-bed-width]').value,
         height: createBedForm.querySelector('input[data-bed-height]').value,
         fill: createBedForm.querySelector('input[data-bed-colour]').value,
-        soil_characteristics: createBedForm.querySelector('select[data-bed-soil-characteristics]').value,
-        bed_type: createBedForm.querySelector('select[data-bed-type]').value,
+        soilCharacteristics: createBedForm.querySelector('select[data-bed-soil-characteristics]').value,
+        bedType: createBedForm.querySelector('select[data-bed-type]').value,
         isDragging: false
     });
 }
@@ -123,8 +123,8 @@ httpRequests.get('/getBeds').then(response => {
                 width: obj.bed_width,
                 height: obj.bed_height,
                 fill: obj.bed_colour,
-                soil_characteristics: obj.bed_soil_characteristics,
-                bed_type: obj.bed_type,
+                soilCharacteristics: obj.bed_soil_characteristics,
+                bedType: obj.bed_type,
                 isDragging: false,
             });
             if(i < 32) {
@@ -151,9 +151,9 @@ httpRequests.get('/getPlants').then(response => {
                 name: obj.plant_name,
                 bed: obj.plant_bed,
                 type: obj.plant_type,
-                datePlanted: obj.plant_date_planted,
-                lastCrop: obj.plant_last_crop,
-                nextCrop: obj.plant_next_crop,
+                datePlanted: obj.plant_date_planted.slice(0, 10),
+                lastCrop: obj.plant_last_crop.slice(0, 10),
+                nextCrop: obj.plant_next_crop.slice(0, 10),
                 imageFileName: obj.plant_icon,
                 x: obj.plant_x,
                 y: obj.plant_y,
