@@ -12,12 +12,14 @@ module.exports = {
             plant_icon
         })
     },
-    updatePlantBed({plant_name, plant_bed}) {
+    updatePlantPosition({plant_name, plant_bed, plant_x, plant_y}) {
         const _plant_name = plant_name;
         const _plant_bed = plant_bed;
+        const _plant_x = plant_x;
+        const _plant_y = plant_y;
 
         return knex('plants').where({plant_name: _plant_name})
-            .update({plant_bed: _plant_bed})
+            .update({plant_bed: _plant_bed, plant_x: _plant_x, plant_y: _plant_y})
     },
     updatePlant({plant_name, plant_bed, plant_type, plant_date_planted, plant_last_crop, plant_next_crop, plant_icon}) {
         const _plant_name = plant_name;

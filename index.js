@@ -47,16 +47,20 @@ app.post('/updateBedPosition', (req, res) => {
             bed_y: req.body.bed_y
         })
         .then(() => {
+            console.log('\x1b[36m%s\x1b[0m', 'Update beds position:\n', req.body);
             res.sendStatus(200);
         })
 });
-app.post('/updatePlantBed', (req, res) => {
+app.post('/updatePlantPosition', (req, res) => {
     store
-        .updateBedPosition({
+        .updatePlantPosition({
             plant_name: req.body.plant_name,
             plant_bed: req.body.plant_bed,
+            plant_x: req.body.plant_x,
+            plant_y: req.body.plant_y
         })
         .then(() => {
+            console.log('\x1b[36m%s\x1b[0m', 'Update plant bed:\n', req.body);
             res.sendStatus(200);
         })
 });

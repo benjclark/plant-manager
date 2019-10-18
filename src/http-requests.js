@@ -30,10 +30,10 @@ function sendSaveAllBedPositionsRequest() {
     }
 }
 
-function sendSaveAllPlantBeds() {
+function sendSaveAllPlantPositionsRequest() {
     const pm = window.plantManager;
     for (let z = 0; z < pm.plants.length; z++) {
-        post('/updatePlantBed',{plant_name: pm.plants[z].name, plant_bed: pm.plants[z].bed});
+        post('/updatePlantPosition',{plant_name: pm.plants[z].name, plant_bed: pm.plants[z].bed, plant_x: pm.plants[z].x, plant_y: pm.plants[z].y});
     }
 }
 
@@ -105,7 +105,7 @@ module.exports = {
     sendCreatePlantRequest,
     sendCreateBedRequest,
     sendSaveAllBedPositionsRequest,
-    sendSaveAllPlantBeds,
+    sendSaveAllPlantPositionsRequest,
     sendSaveBedRequest,
     sendSavePlantRequest,
     sendDeleteBedRequest,

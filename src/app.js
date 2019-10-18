@@ -12,7 +12,6 @@ function retrieveBedFromWindowObject(name) {
             return beds[i];
         }
     }
-
 }
 
 function createBedRectInWindow() {
@@ -69,7 +68,7 @@ document.querySelector('form[data-create-bed]').addEventListener('submit', event
 document.querySelector('button[data-update-beds]').addEventListener('click', event => {
     event.preventDefault();
     httpRequests.sendSaveAllBedPositionsRequest();
-    httpRequests.sendSaveAllPlantBeds();
+    httpRequests.sendSaveAllPlantPositionsRequest();
 });
 
 document.querySelector('input[data-save-bed]').addEventListener('click', event => {
@@ -156,8 +155,8 @@ httpRequests.get('/getPlants').then(response => {
                 lastCrop: obj.plant_last_crop,
                 nextCrop: obj.plant_next_crop,
                 imageFileName: obj.plant_icon,
-                x: 0,
-                y: 0,
+                x: obj.plant_x,
+                y: obj.plant_y,
                 width: 35,
                 height: 35,
                 isDragging: false
