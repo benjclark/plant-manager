@@ -125,5 +125,5 @@ app.get('/getPlants', (req, res) => {
 });
 
 app.listen(7555, () => {
-    console.log('Server running http://local:7555');
+    console.log('Server running http://localhost:7555');
 });
