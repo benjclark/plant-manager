@@ -96,6 +96,17 @@
             display: none;
         }
 
+        .move-plants-with-beds-radio {
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .move-plants-with-beds-radio + input {
+            display: inline-block;
+            margin-left: 12px;
+        }
+
         .overlay {
             padding: 14px;
             width: 300px;
@@ -270,6 +281,10 @@
                 <span class="plus-icon" data-open-overlay="plant"></span><span class="add-button">Plant</span>
             </div>
             <button data-update-beds class="save-button">Save layout</button>
+            <div>
+                <label class="move-plants-with-beds-radio" for="move-plants-with-bed">Move whole bed incl. plants</label>
+                <input type="radio" id="move-plants-with-bed" data-move-plants-with-bed>
+            </div>
             <div class="edit-bed">Edit bed properties</div>
             <form data-update-bed class="update-bed-form">
                 <label for="bed-update-name">Bed name</label>

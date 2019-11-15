@@ -77,13 +77,35 @@ function renderEditFormForCurrentlySelectedBed() {
     updateBedForm.querySelector('[data-bed-type]').value = type;
 }
 
+function setMovePlantsWithBedState() {
+    const input = document.querySelector('[data-move-plants-with-bed]');
+    const checked = input.checked;
+    if (checked) {
+        window.plantManager.mouseEventVariables.movePlantsWithBedState = true;
+        return;
+    }
+    window.plantManager.mouseEventVariables.movePlantsWithBedState = false;
+    return;
+}
+
+const movePlantsBedButton = document.querySelector('[data-move-plants-with-bed]');
+movePlantsBedButton.addEventListener('click', () => {
+    setMovePlantsWithBedState();
+    if (movePlantsBedButton.checked === true) {
+        movePlantsBedButton.checked = false;
+    } else {
+        movePlantsBedButton.checked = true;
+    }
+});
+
 window.plantManager = {
     canvasOffsetX: canvas.getBoundingClientRect().left,
     canvasOffsetY: canvas.getBoundingClientRect().top,
     beds: [],
     plants: [],
     renderEditFormForCurrentlySelectedBed: renderEditFormForCurrentlySelectedBed,
-    renderEditFormForCurrentlySelectedPlant: renderEditFormForCurrentlySelectedPlant
+    renderEditFormForCurrentlySelectedPlant: renderEditFormForCurrentlySelectedPlant,
+    setMovePlantsWithBedState: setMovePlantsWithBedState
 };
 const pm = window.plantManager;
 
@@ -94,6 +116,7 @@ mouseEventHandlers.setupMouseEventVariables();
 canvas.onmousedown = mouseEventHandlers.mouseDownHandler;
 canvas.onmouseup = mouseEventHandlers.mouseUpHandler;
 canvas.onmousemove = mouseEventHandlers.mouseMoveHandler;
+setMovePlantsWithBedState();
 
 drawOnCanvas.drawAll();
 pm.drawAll = drawOnCanvas.drawAll;

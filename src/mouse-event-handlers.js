@@ -24,7 +24,7 @@ function dragIfClicked(rects, pm, mx, my, mouseEventVars) {
             mouseEventVars.currentRectSelected = rect;
             rect.isDragging = true;
             pm.renderEditFormForCurrentlySelectedBed();
-            break;
+            return;
         }
     }
 }
@@ -40,10 +40,26 @@ function mouseDownHandler(e) {
 
     mouseEventVars.somethingIsBeingDragged = false;
 
-    dragIfClicked(pm.plants, pm, mx, my, mouseEventVars);
-    if (mouseEventVars.somethingIsBeingDragged === false) {
+    const shouldMoveBedsWithPlants = window.plantManager.mouseEventVariables.movePlantsWithBedState;
+    console.log(shouldMoveBedsWithPlants);
+
+    if (shouldMoveBedsWithPlants) {
         dragIfClicked(pm.beds, pm, mx, my, mouseEventVars);
+        const bedName = mouseEventVars.currentRectSelected.name;
+
+        for (let i = 0; i < pm.plants.length; i++) {
+            if (pm.plants[i].bed === bedName) {
+                pm.plants[i].isDragging = true;
+                console.log(pm.plants[i]);
+            }
+        }
+    } else {
+        dragIfClicked(pm.plants, pm, mx, my, mouseEventVars);
+        if (mouseEventVars.somethingIsBeingDragged === false) {
+            dragIfClicked(pm.beds, pm, mx, my, mouseEventVars);
+        }
     }
+
     mouseEventVars.startX = mx;
     mouseEventVars.startY = my;
 }
@@ -86,11 +102,12 @@ function mouseMoveHandler(e) {
 
 function setupMouseEventVariables() {
     const pm = window.plantManager;
-    const mouseEventVars = pm.mouseEventVariables = {};
-    mouseEventVars.somethingIsBeingDragged = false;
-    mouseEventVars.currentRectSelected = undefined;
-    mouseEventVars.startX = undefined;
-    mouseEventVars.startY = undefined;
+    pm.mouseEventVariables = {};
+    pm.mouseEventVariables.somethingIsBeingDragged = false;
+    pm.mouseEventVariables.currentRectSelected = undefined;
+    pm.mouseEventVariables.startX = undefined;
+    pm.mouseEventVariables.startY = undefined;
+    pm.mouseEventVariables.movePlantsWithBedState = undefined;
 }
 
 module.exports = {
